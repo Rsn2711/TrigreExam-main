@@ -4,25 +4,21 @@ import React from "react";
 const TotalMentors: React.FC = () => {
   return (
     <>
-      <div className="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
+      <div className="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] rounded-2xl border border-gray-100 dark:border-[#172036] shadow-sm flex justify-between items-center group hover:shadow-lg hover:-translate-y-1 hover:bg-blue-50 dark:hover:bg-[#15203c] transition-all duration-300 cursor-pointer">
         <div className="trezo-card-content">
-          <span className="block">Total Documents</span>
+          <span className="block text-black font-bold text-sm mb-1">All India Rank</span>
 
-          <h5 className="!text-[20px] mt-[3px] !mb-0">145</h5>
+          <h3 className="text-[28px] font-bold text-gray-900 dark:text-white mb-1">#142</h3>
 
-          <div className="flex items-center justify-center mx-auto text-orange-500 bg-orange-100 dark:bg-[#15203c] w-[77px] h-[77px] my-[15px] rounded-full">
-            <i className="material-symbols-outlined !text-[32px]">description</i>
-          </div>
+          <span className="inline-block text-xs font-medium text-success-600 bg-success-50 dark:bg-[#15203c] px-2 py-0.5 rounded-full">
+            Top 5%
+          </span>
+        </div>
 
-          <div className="flex items-center justify-between text-sm">
-            <span className="block">Downloaded</span>
-
-            <span className="leading-none text-success-600">
-              <i className="material-symbols-outlined !text-[20px]">
-                file_download
-              </i>
-            </span>
-          </div>
+        <div className="flex items-center justify-center w-[55px] h-[55px] bg-warning-50 text-warning-500 rounded-2xl dark:bg-[#15203c]">
+          <i className="material-symbols-outlined !text-[28px]">
+            workspace_premium
+          </i>
         </div>
       </div>
     </>

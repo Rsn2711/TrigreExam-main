@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const StudentsInterestedTopics: React.FC = () => {
   return (
     <>
-      <div className="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
+      <div className="trezo-card bg-white dark:bg-[#0c1427] h-full p-[20px] md:p-[25px] rounded-md">
         <div className="trezo-card-header mb-[20px] md:mb-[25px]">
           <h5 className="!mb-[5px] text-xl font-bold">My Results</h5>
           <p className="text-gray-500 dark:text-gray-400 text-sm">
@@ -68,7 +68,7 @@ const StudentsInterestedTopics: React.FC = () => {
                 <span className="text-xs text-gray-500">Rank: #142</span>
               </div>
               <div className="w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
-                <div className="bg-success-500 h-full rounded-full" style={{ width: "85%" }}></div>
+                <div className="bg-blue-500 h-full rounded-full" style={{ width: "85%" }}></div>
               </div>
             </div>
 
@@ -83,7 +83,7 @@ const StudentsInterestedTopics: React.FC = () => {
                 <span className="text-xs text-gray-500">Rank: #289</span>
               </div>
               <div className="w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
-                <div className="bg-secondary-500 h-full rounded-full" style={{ width: "72%" }}></div>
+                <div className="bg-blue-500 h-full rounded-full" style={{ width: "72%" }}></div>
               </div>
             </div>
 
@@ -98,7 +98,7 @@ const StudentsInterestedTopics: React.FC = () => {
                 <span className="text-xs text-gray-500">Rank: #356</span>
               </div>
               <div className="w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
-                <div className="bg-orange-500 h-full rounded-full" style={{ width: "68%" }}></div>
+                <div className="bg-blue-500 h-full rounded-full" style={{ width: "68%" }}></div>
               </div>
             </div>
 
@@ -113,7 +113,7 @@ const StudentsInterestedTopics: React.FC = () => {
                 <span className="text-xs text-gray-500">Rank: #412</span>
               </div>
               <div className="w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
-                <div className="bg-orange-400 h-full rounded-full" style={{ width: "65%" }}></div>
+                <div className="bg-blue-500 h-full rounded-full" style={{ width: "65%" }}></div>
               </div>
             </div>
 
@@ -128,7 +128,7 @@ const StudentsInterestedTopics: React.FC = () => {
                 <span className="text-xs text-gray-500">Rank: #520</span>
               </div>
               <div className="w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
-                <div className="bg-danger-500 h-full rounded-full" style={{ width: "60%" }}></div>
+                <div className="bg-blue-500 h-full rounded-full" style={{ width: "60%" }}></div>
               </div>
             </div>
           </div>

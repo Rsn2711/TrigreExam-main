@@ -4,26 +4,21 @@ import React from "react";
 const TotalCourses: React.FC = () => {
   return (
     <>
-      <div className="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
+      <div className="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] rounded-2xl border border-gray-100 dark:border-[#172036] shadow-sm flex justify-between items-center group hover:shadow-lg hover:-translate-y-1 hover:bg-blue-50 dark:hover:bg-[#15203c] transition-all duration-300 cursor-pointer">
         <div className="trezo-card-content">
-          <span className="block">Total Tests Attempted</span>
+          <span className="block text-black font-bold text-sm mb-1">Tests Taken</span>
 
-          <h5 className="!text-[20px] mt-[3px] !mb-0">24</h5>
+          <h3 className="text-[28px] font-bold text-gray-900 dark:text-white mb-1">24</h3>
 
-          <div className="flex items-center justify-center mx-auto text-secondary-500 bg-secondary-100 dark:bg-[#15203c] w-[77px] h-[77px] my-[15px] rounded-full">
-            <i className="material-symbols-outlined !text-[32px]">
-              track_changes
-            </i>
-          </div>
+          <span className="inline-block text-xs font-medium text-success-600 bg-success-50 dark:bg-[#15203c] px-2 py-0.5 rounded-full">
+            +4 this week
+          </span>
+        </div>
 
-          <div className="flex items-center justify-between text-sm">
-            <span className="block">This Week</span>
-            <span className="leading-none text-success-600">
-              <i className="material-symbols-outlined !text-[20px]">
-                trending_up
-              </i>
-            </span>
-          </div>
+        <div className="flex items-center justify-center w-[55px] h-[55px] bg-danger-50 text-danger-500 rounded-2xl dark:bg-[#15203c]">
+          <i className="material-symbols-outlined !text-[28px]">
+            target
+          </i>
         </div>
       </div>
     </>

@@ -1,10 +1,10 @@
 
 import React, { useEffect } from "react";
-import Settings from "./Settings";
+
 import DarkMode from "./DarkMode";
-import SearchForm from "./SearchForm";
+
 import AppsMenu from "./AppsMenu";
-import ChooseLanguage from "./ChooseLanguage";
+
 import Fullscreen from "./Fullscreen";
 import Notifications from "./Notifications";
 import ProfileMenu from "./ProfileMenu";
@@ -50,15 +50,16 @@ const Header: React.FC<HeaderProps> = ({ toggleActive }) => {
               </button>
             </div>
 
-            <SearchForm />
 
-            <AppsMenu />
+
+
           </div>
 
           <div className="flex items-center justify-center md:justify-normal mt-[13px] md:mt-0">
+            <AppsMenu />
             <DarkMode />
 
-            <ChooseLanguage />
+
 
             <Fullscreen />
 
@@ -66,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ toggleActive }) => {
 
             <ProfileMenu />
 
-            <Settings />
+
           </div>
         </div>
       </div>

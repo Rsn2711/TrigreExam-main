@@ -12,7 +12,7 @@ const SignInForm: React.FC = () => {
 
   React.useEffect(() => {
     if (isAuthenticated) {
-      navigate("/dashboard/ecommerce");
+      navigate("/dashboard");
     }
   }, [isAuthenticated, navigate]);
 
@@ -21,7 +21,7 @@ const SignInForm: React.FC = () => {
     setError(null);
     try {
       await login(email, password);
-      navigate("/dashboard/ecommerce");
+      navigate("/dashboard");
     } catch (err) {
       setError("Invalid email or password");
     }

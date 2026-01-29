@@ -12,6 +12,7 @@ type Course = {
     completedTests: number;
     expiryDate: string;
     viewLink: string;
+    totalVideos: number;
 };
 
 const coursesData: Course[] = [
@@ -19,62 +20,67 @@ const coursesData: Course[] = [
         id: 1,
         title: "JEE Advanced Physics",
         subtitle: "Complete Test Series 2025",
-        image: "/images/courses/course1.jpg", // Placeholder, will use CSS background or similar
-        color: "bg-gradient-to-r from-blue-600 to-blue-500",
+        image: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?auto=format&fit=crop&q=80&w=600",
+        color: "bg-white",
         progress: 65,
         completedTests: 13,
         totalTests: 20,
         expiryDate: "Dec 31, 2025",
         viewLink: "/lms/course-details",
+        totalVideos: 12,
     },
     {
         id: 2,
         title: "JEE Advanced Chemistry",
         subtitle: "Complete Test Series 2025",
-        image: "/images/courses/course2.jpg",
-        color: "bg-gradient-to-r from-teal-500 to-teal-400",
+        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600",
+        color: "bg-white",
         progress: 45,
         completedTests: 9,
         totalTests: 20,
         expiryDate: "Dec 31, 2025",
         viewLink: "/lms/course-details",
+        totalVideos: 8,
     },
     {
         id: 3,
         title: "JEE Advanced Mathematics",
         subtitle: "Complete Test Series 2025",
-        image: "/images/courses/course3.jpg",
-        color: "bg-gradient-to-r from-purple-500 to-pink-500",
+        image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=600",
+        color: "bg-white",
         progress: 30,
         completedTests: 6,
         totalTests: 20,
         expiryDate: "Dec 31, 2025",
         viewLink: "/lms/course-details",
+        totalVideos: 15,
     },
     {
         id: 4,
         title: "NEET Physics",
         subtitle: "Complete Test Series 2025",
-        image: "/images/courses/course4.jpg",
-        color: "bg-gradient-to-r from-orange-500 to-red-500",
+        image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=600",
+        color: "bg-white",
         progress: 80,
         completedTests: 16,
         totalTests: 20,
         expiryDate: "Dec 31, 2025",
         viewLink: "/lms/course-details",
+        totalVideos: 20,
     },
     {
         id: 5,
         title: "NEET Biology",
         subtitle: "Complete Test Series 2025",
-        image: "/images/courses/course5.jpg",
-        color: "bg-gradient-to-r from-green-500 to-emerald-500",
+        image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80&w=600",
+        color: "bg-white",
         progress: 20,
         completedTests: 4,
         totalTests: 20,
         expiryDate: "Dec 31, 2025",
         viewLink: "/lms/course-details",
-    },
+        totalVideos: 10,
+    }
 ];
 
 const ExploreCourses: React.FC = () => {
@@ -91,53 +97,33 @@ const ExploreCourses: React.FC = () => {
                     {coursesData.map((course) => (
                         <div
                             key={course.id}
-                            className="trezo-card bg-white dark:bg-[#0c1427] rounded-xl overflow-hidden min-w-[350px] md:min-w-[380px] shadow-sm flex-shrink-0 border border-gray-100 dark:border-[#172036]"
+                            className="trezo-card bg-white dark:bg-[#0c1427] rounded-2xl overflow-hidden min-w-[350px] md:min-w-[380px] shadow-sm flex-shrink-0 border border-gray-100 dark:border-[#172036] hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-[#15203c] transition-all duration-300 cursor-pointer"
                         >
-                            {/* Header */}
-                            <div className={`relative h-[160px] flex flex-col justify-center items-center text-center p-6 ${course.color}`}>
-                                {/* Overlay pattern or image could go here */}
-                                <div className="absolute inset-0 opacity-20 bg-[url('/images/pattern.png')] bg-cover mix-blend-overlay"></div>
-
-                                <div className="relative z-10">
-                                    <h3 className="!text-white text-xl md:text-2xl font-bold mb-2">{course.title}</h3>
-                                    <p className="text-white/90 text-sm font-medium">{course.subtitle}</p>
-                                </div>
+                            {/* Header Image */}
+                            <div className="h-[180px] w-full overflow-hidden relative">
+                                <img
+                                    src={course.image}
+                                    alt={course.title}
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
 
                             {/* Body */}
                             <div className="p-[20px] md:p-[25px]">
+                                <h3 className="text-black text-lg md:text-xl font-bold mb-1">{course.title}</h3>
+                                <p className="text-gray-500 text-xs mb-4">{course.subtitle}</p>
 
-                                {/* Progress */}
-                                <div className="mb-6">
-                                    <div className="flex justify-between items-center mb-2 text-sm font-medium">
-                                        <span className="text-gray-600 dark:text-gray-400">Progress</span>
-                                        <span className="text-gray-800 dark:text-gray-200">{course.progress}%</span>
-                                    </div>
-                                    <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2.5">
-                                        <div
-                                            className="h-2.5 rounded-full"
-                                            style={{
-                                                width: `${course.progress}%`,
-                                                backgroundColor: course.color.includes("blue") ? "#3584fc" :
-                                                    course.color.includes("teal") ? "#14b8a6" :
-                                                        course.color.includes("purple") ? "#a855f7" :
-                                                            course.color.includes("orange") ? "#f97316" : "#22c55e"
-                                            }}
-                                        ></div>
-                                    </div>
-                                </div>
+
 
                                 {/* Stats Row */}
                                 <div className="flex justify-between items-center mb-6">
-                                    <div className="flex items-center gap-2 bg-green-50 dark:bg-green-900/20 px-3 py-2 rounded-lg">
-                                        <i className="material-symbols-outlined text-green-500 text-[18px]">check_circle</i>
-                                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">
-                                            {course.completedTests}/{course.totalTests} Tests
-                                        </span>
+                                    <div className="flex items-center gap-2 text-gray-500 text-sm font-medium">
+                                        <i className="material-symbols-outlined text-[18px]">play_lesson</i>
+                                        <span>{course.totalVideos} Videos • {course.totalTests} Tests</span>
                                     </div>
 
-                                    <div className="flex items-center gap-2 bg-orange-50 dark:bg-orange-900/20 px-3 py-2 rounded-lg">
-                                        <i className="material-symbols-outlined text-orange-500 text-[18px]">schedule</i>
+                                    <div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-3 py-2 rounded-lg">
+                                        <i className="material-symbols-outlined text-blue-500 text-[18px]">schedule</i>
                                         <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">
                                             {course.expiryDate}
                                         </span>
