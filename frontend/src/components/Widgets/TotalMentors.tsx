@@ -16,7 +16,7 @@ const TotalMentors: React.FC = () => {
 
           <div className="flex items-center justify-between text-sm">
             <span className="block">This Month</span>
-            
+
             <span className="leading-none text-success-600">
               <i className="material-symbols-outlined !text-[20px]">
                 trending_up

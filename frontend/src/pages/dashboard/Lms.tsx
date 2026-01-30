@@ -17,17 +17,9 @@ const Lms = () => {
       </div>
 
       <div className="sm:grid sm:grid-cols-3 gap-[15px] mb-[25px]">
-        <div>
-          <TotalCourses />
-        </div>
-
-        <div>
-          <TotalEnrolled />
-        </div>
-
-        <div>
-          <TotalMentors />
-        </div>
+        <TotalCourses />
+        <TotalEnrolled />
+        <TotalMentors />
       </div>
 
       <div className="grid grid-cols-1 gap-[15px] mb-[25px]">

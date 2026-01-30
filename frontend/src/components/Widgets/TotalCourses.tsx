@@ -15,7 +15,7 @@ const TotalCourses: React.FC = () => {
               auto_stories
             </i>
           </div>
-          
+
           <div className="flex items-center justify-between text-sm">
             <span className="block">This Month</span>
             <span className="leading-none text-success-600">

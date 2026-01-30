@@ -5,10 +5,18 @@ interface SidebarMenuProps {
   toggleActive: () => void;
 }
 
+const menuItems = [
+  { path: "/dashboard", icon: "dashboard", label: "Dashboard" },
+  { path: "/my-courses", icon: "school", label: "My Courses" },
+  { path: "/my-results", icon: "bar_chart", label: "My Results" },
+  { path: "/my-purchases", icon: "shopping_cart", label: "My Purchases" },
+  { path: "/announcements", icon: "campaign", label: "Announcements" },
+  { path: "/settings", icon: "settings", label: "Settings" },
+  { path: "/help", icon: "help", label: "Help" },
+];
+
 const SidebarMenu: React.FC<SidebarMenuProps> = ({ toggleActive }) => {
   const { pathname } = useLocation();
-
-
 
   // Scroll to top on route change
   useEffect(() => {
@@ -17,132 +25,75 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ toggleActive }) => {
 
   return (
     <>
-      <div className="sidebar-area bg-white dark:bg-[#0c1427] fixed z-[60] top-0 h-screen transition-all rounded-r-md">
-        <div className="logo bg-white dark:bg-[#0c1427] border-b border-gray-100 dark:border-[#172036] px-[25px] pt-[19px] pb-[15px] absolute z-[2] right-0 top-0 left-0">
+      {/* Sidebar Container with enhanced shadow for "floating" effect */}
+      <div className="sidebar-area bg-white dark:bg-[#0c1427] fixed z-[60] top-0 h-screen transition-all shadow-xl dark:shadow-gray-900 border-r border-gray-100 dark:border-[#172036] w-[280px]">
+
+        {/* Logo Section */}
+        <div className="logo bg-white dark:bg-[#0c1427] px-[30px] pt-[28px] pb-[28px] flex justify-between items-center mb-4">
           <Link
             to="/dashboard/ecommerce"
-            className="transition-none relative flex items-center outline-none"
+            className="flex items-center gap-3 transition-none outline-none"
           >
-            <img
-              src="/images/logo-icon.svg"
-              alt="logo-icon"
-              width={26}
-              height={26}
-            />
-            <span className="font-bold text-black dark:text-white relative ltr:ml-[8px] rtl:mr-[8px] top-px text-xl">
-              TrigreExam
+            <div className="text-primary-500">
+              <img
+                src="/images/logo-icon.svg"
+                alt="logo-icon"
+                width={34}
+                height={34}
+                className="object-contain drop-shadow-sm"
+              />
+            </div>
+            <span className="font-bold text-2xl tracking-tighter">
+              <span className="text-slate-900 dark:text-white">Trigre</span>
+              <span className="text-primary-600">Exam</span>
             </span>
           </Link>
 
           <button
             type="button"
-            className="burger-menu inline-block absolute z-[3] top-[24px] ltr:right-[25px] rtl:left-[25px] transition-all hover:text-primary-500"
+            className="burger-menu block lg:hidden transition-all hover:text-primary-500 text-gray-400"
             onClick={toggleActive}
           >
-            <i className="material-symbols-outlined">close</i>
+            <i className="material-symbols-outlined text-2xl">close</i>
           </button>
         </div>
 
-        <div className="pt-[89px] px-[22px] pb-[20px] h-screen overflow-y-scroll sidebar-custom-scrollbar">
-          <div className="accordion">
+        {/* Menu Items */}
+        <div className="px-[12px] pb-[20px] h-[calc(100vh-100px)] overflow-y-auto sidebar-custom-scrollbar">
+          <div className="flex flex-col gap-1.5">
+            {menuItems.map((item) => {
+              const isActive = pathname === item.path;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`
+                    relative group flex items-center px-[24px] py-[14px] rounded-r-full overflow-hidden
+                    transition-all duration-300 ease-in-out
+                    ${isActive
+                      ? "bg-gradient-to-r from-primary-50 to-transparent dark:from-[#15203c] dark:to-transparent text-primary-600 dark:text-primary-400 font-semibold"
+                      : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-[#15203c]/50 font-medium hover:translate-x-1"
+                    }
+                  `}
+                >
+                  {/* Left Accent Border for Active State */}
+                  {isActive && (
+                    <span className="absolute left-0 top-0 bottom-0 w-[4px] bg-primary-600 dark:bg-primary-500 rounded-r-lg"></span>
+                  )}
 
-
-            <div className="accordion-item rounded-md text-black dark:text-white mb-[5px] whitespace-nowrap">
-              <Link
-                to="/dashboard"
-                className={`accordion-button flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[30px] rtl:pr-[14px] rtl:pl-[30px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c] ${pathname === "/dashboard" ? "active" : ""
-                  }`}
-              >
-                <i className="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 ltr:mr-[7px] rtl:ml-[7px] !text-[22px] leading-none relative -top-px">
-                  dashboard
-                </i>
-                <span className="title leading-none">Dashboard</span>
-              </Link>
-            </div>
-
-            <div className="accordion-item rounded-md text-black dark:text-white mb-[5px] whitespace-nowrap">
-              <Link
-                to="/my-courses"
-                className={`accordion-button flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[30px] rtl:pr-[14px] rtl:pl-[30px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c] ${pathname === "/my-courses" ? "active" : ""
-                  }`}
-              >
-                <i className="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 ltr:mr-[7px] rtl:ml-[7px] !text-[22px] leading-none relative -top-px">
-                  school
-                </i>
-                <span className="title leading-none">My Courses</span>
-              </Link>
-            </div>
-
-
-
-            <div className="accordion-item rounded-md text-black dark:text-white mb-[5px] whitespace-nowrap">
-              <Link
-                to="/my-results"
-                className={`accordion-button flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[30px] rtl:pr-[14px] rtl:pl-[30px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c] ${pathname === "/my-results" ? "active" : ""
-                  }`}
-              >
-                <i className="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 ltr:mr-[7px] rtl:ml-[7px] !text-[22px] leading-none relative -top-px">
-                  bar_chart
-                </i>
-                <span className="title leading-none">My Results</span>
-              </Link>
-            </div>
-
-            <div className="accordion-item rounded-md text-black dark:text-white mb-[5px] whitespace-nowrap">
-              <Link
-                to="/my-purchases"
-                className={`accordion-button flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[30px] rtl:pr-[14px] rtl:pl-[30px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c] ${pathname === "/my-purchases" ? "active" : ""
-                  }`}
-              >
-                <i className="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 ltr:mr-[7px] rtl:ml-[7px] !text-[22px] leading-none relative -top-px">
-                  shopping_cart
-                </i>
-                <span className="title leading-none">My Purchases</span>
-              </Link>
-            </div>
-
-            <div className="accordion-item rounded-md text-black dark:text-white mb-[5px] whitespace-nowrap">
-              <Link
-                to="/announcements"
-                className={`accordion-button flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[30px] rtl:pr-[14px] rtl:pl-[30px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c] ${pathname === "/announcements" ? "active" : ""
-                  }`}
-              >
-                <i className="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 ltr:mr-[7px] rtl:ml-[7px] !text-[22px] leading-none relative -top-px">
-                  campaign
-                </i>
-                <span className="title leading-none">Announcements</span>
-              </Link>
-            </div>
-
-            <div className="accordion-item rounded-md text-black dark:text-white mb-[5px] whitespace-nowrap">
-              <Link
-                to="/settings"
-                className={`accordion-button flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[30px] rtl:pr-[14px] rtl:pl-[30px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c] ${pathname === "/settings" ? "active" : ""
-                  }`}
-              >
-                <i className="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 ltr:mr-[7px] rtl:ml-[7px] !text-[22px] leading-none relative -top-px">
-                  settings
-                </i>
-                <span className="title leading-none">Settings</span>
-              </Link>
-            </div>
-
-            <div className="accordion-item rounded-md text-black dark:text-white mb-[5px] whitespace-nowrap">
-              <Link
-                to="/help"
-                className={`accordion-button flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[30px] rtl:pr-[14px] rtl:pl-[30px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c] ${pathname === "/help" ? "active" : ""
-                  }`}
-              >
-                <i className="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 ltr:mr-[7px] rtl:ml-[7px] !text-[22px] leading-none relative -top-px">
-                  help
-                </i>
-                <span className="title leading-none">Help</span>
-              </Link>
-            </div>
-
-
-
-
+                  <i
+                    className={`material-symbols-outlined text-[24px] ltr:mr-[14px] rtl:ml-[14px] transition-colors duration-300
+                      ${isActive ? "text-primary-600 dark:text-primary-400 scale-110" : "text-gray-400 group-hover:text-primary-500 dark:group-hover:text-primary-400"}
+                    `}
+                  >
+                    {item.icon}
+                  </i>
+                  <span className={`text-[15px] leading-none tracking-wide ${isActive ? "ml-1" : ""} transition-all duration-300`}>
+                    {item.label}
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

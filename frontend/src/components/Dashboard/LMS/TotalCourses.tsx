@@ -1,28 +1,24 @@
-
 import React from "react";
 
 const TotalCourses: React.FC = () => {
-  return (
-    <>
-      <div className="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] rounded-2xl border border-gray-100 dark:border-[#172036] shadow-sm flex justify-between items-center group hover:shadow-lg hover:-translate-y-1 hover:bg-blue-50 dark:hover:bg-[#15203c] transition-all duration-300 cursor-pointer">
-        <div className="trezo-card-content">
-          <span className="block text-black font-bold text-sm mb-1">Tests Taken</span>
-
-          <h3 className="text-[28px] font-bold text-gray-900 dark:text-white mb-1">24</h3>
-
-          <span className="inline-block text-xs font-medium text-success-600 bg-success-50 dark:bg-[#15203c] px-2 py-0.5 rounded-full">
-            +4 this week
-          </span>
+    return (
+        <div className="bg-white dark:bg-[#0c1427] h-full rounded-2xl p-[12px] shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-between">
+            <div className="flex flex-col gap-0.5">
+                <span className="block text-gray-500 dark:text-gray-400 text-[10px] font-bold uppercase tracking-wider">
+                    TESTS TAKEN
+                </span>
+                <h3 className="mb-0 text-xl font-bold text-gray-900 dark:text-white mt-0">
+                    24
+                </h3>
+                <span className="inline-block bg-success-50 text-success-600 text-[10px] font-semibold px-1.5 py-0.5 rounded-full mt-1 w-fit">
+                    +4 this week
+                </span>
+            </div>
+            <div className="w-[42px] h-[42px] rounded-2xl bg-red-50 dark:bg-[#15203c] text-red-500 flex items-center justify-center text-xl">
+                <i className="material-symbols-outlined text-[20px]">track_changes</i>
+            </div>
         </div>
-
-        <div className="flex items-center justify-center w-[55px] h-[55px] bg-danger-50 text-danger-500 rounded-2xl dark:bg-[#15203c]">
-          <i className="material-symbols-outlined !text-[28px]">
-            target
-          </i>
-        </div>
-      </div>
-    </>
-  );
+    );
 };
 
 export default TotalCourses;
