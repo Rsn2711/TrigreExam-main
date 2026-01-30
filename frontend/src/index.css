@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+/* Dark mode variant */
+@custom-variant dark (&:where([class=dark], [class=dark] *));
+
+/* Design tokens */
+@theme {
+  --font-body: "Montserrat", sans-serif;
+
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 24px;
+  --text-2xl: 28px;
+}
+
+
+
 @custom-variant dark (&:where([class=dark], [class=dark] *));
 
 @theme {
@@ -108,6 +126,76 @@
   --color-info-800: #0088a2;
   --color-info-900: #006574;
   --shadow-3xl: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(14deg);
+  }
+
+  20% {
+    transform: rotate(-8deg);
+  }
+
+  30% {
+    transform: rotate(14deg);
+  }
+
+  40% {
+    transform: rotate(-4deg);
+  }
+
+  50% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-wave {
+  animation: wave 2s infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+  0% {
+    height: 10%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  100% {
+    height: 10%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
 }
 
 /** Body */
@@ -2303,4 +2391,57 @@ html[dir="rtl"] {
       padding-right: 1.5em;
     }
   }
+}
+/* ===================== */
+/* WELCOME PAGE ANIMATION */
+/* ===================== */
+
+@keyframes welcomeFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-welcome {
+  animation: welcomeFadeUp 700ms ease-out both;
+}
+
+/* fade + slide for inner elements */
+@keyframes fadeOnly {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade {
+  animation: fadeOnly 500ms ease-out both;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* floating background blobs */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 9s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: floatSlow 13s ease-in-out infinite;
 }

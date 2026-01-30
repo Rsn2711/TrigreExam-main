@@ -17,7 +17,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ toggleActive }) => {
 
   return (
     <>
-      <div className="sidebar-area bg-white dark:bg-[#0c1427] fixed z-[7] top-0 h-screen transition-all rounded-r-md">
+      <div className="sidebar-area bg-white dark:bg-[#0c1427] fixed z-[60] top-0 h-screen transition-all rounded-r-md">
         <div className="logo bg-white dark:bg-[#0c1427] border-b border-gray-100 dark:border-[#172036] px-[25px] pt-[19px] pb-[15px] absolute z-[2] right-0 top-0 left-0">
           <Link
             to="/dashboard/ecommerce"

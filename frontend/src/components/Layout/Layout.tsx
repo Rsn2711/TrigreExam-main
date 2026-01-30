@@ -42,7 +42,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <div className="main-content transition-all flex flex-col overflow-hidden min-h-screen">
                     {!isAuthPage && <Header toggleActive={toggleActive} />}
 
-                    {children}
+                    <div key={pathname} className="animate-fade-in-up">
+                        {children}
+                    </div>
 
                     {!isAuthPage && <Footer />}
                 </div>
