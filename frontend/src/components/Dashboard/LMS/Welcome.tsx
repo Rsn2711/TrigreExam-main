@@ -7,20 +7,21 @@ const Welcome: React.FC = () => {
   const [text, setText] = useState(words[0]);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const currentWord = words[wordIndex];
+
   useEffect(() => {
-    const currentWord = words[wordIndex];
-   let timeout: ReturnType<typeof setTimeout>;
+    let timeout: ReturnType<typeof setTimeout>;
 
     if (!isDeleting && text.length < currentWord.length) {
       // typing
       timeout = setTimeout(() => {
         setText(currentWord.slice(0, text.length + 1));
-      }, 70); // typing speed
+      }, 70);
     } else if (isDeleting && text.length > 0) {
       // deleting
       timeout = setTimeout(() => {
         setText(currentWord.slice(0, text.length - 1));
-      }, 50); // delete speed
+      }, 50);
     } else if (!isDeleting && text.length === currentWord.length) {
       // pause before delete
       timeout = setTimeout(() => setIsDeleting(true), 1200);
@@ -31,11 +32,24 @@ const Welcome: React.FC = () => {
     }
 
     return () => clearTimeout(timeout);
-  }, [text, isDeleting, wordIndex]);
+  }, [text, isDeleting, wordIndex, currentWord]);
 
   return (
     <div
-      className="trezo-card mb-[25px] p-[12px] md:p-[20px] rounded-2xl relative overflow-hidden animate-welcome"
+      className="
+        trezo-card
+        mb-[25px]
+        p-[12px] md:p-[20px]
+        rounded-2xl
+        relative
+        overflow-hidden
+        animate-welcome
+        transition-all duration-300
+        hover:-translate-y-1
+        hover:shadow-2xl
+        hover:brightness-110
+        hover:ring-2 hover:ring-white/30
+      "
       style={{
         background: "linear-gradient(135deg, #667EEA 0%, #764BA2 100%)",
       }}
@@ -47,9 +61,7 @@ const Welcome: React.FC = () => {
       <div className="relative z-10 sm:ltr:pr-[250px] sm:rtl:pl-[250px]">
         <h5 className="!mb-[6px] !font-bold !text-xl md:!text-2xl !text-white tracking-tight">
           Welcome back,&nbsp;
-          <span className="inline-block min-w-[90px]">
-            {text}
-          </span>
+          <span className="inline-block min-w-[90px]">{text}</span>
           <span className="ml-1 text-2xl md:text-3xl animate-wave inline-block origin-[70%_70%]">
             👋
           </span>

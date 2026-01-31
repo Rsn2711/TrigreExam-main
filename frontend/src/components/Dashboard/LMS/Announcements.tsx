@@ -67,7 +67,8 @@ const Announcements: React.FC = () => {
     };
 
     return (
-        <div className="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md flex flex-col h-full overflow-hidden">
+        <div className="trezo-card bg-white dark:bg-[#0c1427] h-full p-[20px] md:p-[25px] rounded-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-[#15203c]">
+
             <div className="trezo-card-header mb-[20px] pb-4 border-b border-gray-100 dark:border-[#172036] flex items-center justify-between shrink-0">
                 <div className="trezo-card-title">
                     <h5 className="!mb-0">Announcements</h5>

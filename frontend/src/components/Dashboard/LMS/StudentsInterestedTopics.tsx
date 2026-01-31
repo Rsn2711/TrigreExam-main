@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 const StudentsInterestedTopics: React.FC = () => {
   return (
     <>
-      <div className="trezo-card bg-white dark:bg-[#0c1427] h-full p-[20px] md:p-[25px] rounded-md">
+      <div className="trezo-card bg-white dark:bg-[#0c1427] h-full p-[20px] md:p-[25px] rounded-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-[#15203c]">
+
         <div className="trezo-card-header mb-[20px] md:mb-[25px]">
           <h5 className="!mb-[5px] text-xl font-bold">My Results</h5>
           <p className="text-gray-500 dark:text-gray-400 text-sm">
