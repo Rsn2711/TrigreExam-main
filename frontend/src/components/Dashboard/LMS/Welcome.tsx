@@ -51,7 +51,7 @@ const Welcome: React.FC = () => {
         hover:ring-2 hover:ring-white/30
       "
       style={{
-        background: "linear-gradient(135deg, #667EEA 0%, #764BA2 100%)",
+        background: "linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)",
       }}
     >
       {/* floating background */}

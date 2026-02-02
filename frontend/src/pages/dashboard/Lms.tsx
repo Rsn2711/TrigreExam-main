@@ -82,7 +82,7 @@ const Lms = () => {
 
       <div className="sm:grid sm:grid-cols-3 gap-[15px] mb-[25px]">
         <StatsCard
-          title="TESTS TAKEN"
+          title="TOTAL TESTS ATTEMPTED"
           value="24"
           icon="track_changes"
           iconClassName="bg-red-50 text-red-500"
@@ -93,34 +93,41 @@ const Lms = () => {
           }
         />
         <StatsCard
-          title="AVG. SCORE"
-          value="78%"
-          icon="monitoring"
-          iconClassName="bg-success-50 text-success-600"
+          title="ENROLLED COURSES"
+          value="12"
+          icon="library_books"
+          iconClassName="bg-purple-50 text-purple-600"
           badge={
             <div className="flex items-center gap-1 bg-success-50 text-success-600 text-[10px] font-semibold px-1.5 py-0.5 rounded-full mt-1 w-fit">
               <i className="material-symbols-outlined text-[12px]">
                 trending_up
               </i>
-              <span>+2.5% increase</span>
+              <span>+2 new</span>
             </div>
           }
         />
         <StatsCard
-          title="ALL INDIA RANK"
-          value="#142"
-          icon="workspace_premium"
-          iconClassName="bg-orange-50 text-orange-500"
+          title="TOTAL DOCUMENTS"
+          value="350"
+          icon="description"
+          iconClassName="bg-blue-50 text-blue-500"
           badge={
             <span className="inline-block bg-success-50 text-success-600 text-[10px] font-semibold px-1.5 py-0.5 rounded-full mt-1 w-fit">
-              Top 5%
+              +5 new
             </span>
           }
         />
       </div>
 
+      <div className="mb-[25px]">
+        <CourseList
+          title="Enrolled Courses"
+          courses={coursesData.slice(0, 4)}
+          variant="horizontal"
+        />
+      </div>
+
       <div className="grid grid-cols-1 gap-[15px] mb-[25px]">
-        <CourseList title="Enrolled Courses" courses={coursesData} />
         <CourseList title="Featured Courses" courses={coursesData} />
         <CourseList title="Explore Courses" courses={coursesData} />
       </div>
