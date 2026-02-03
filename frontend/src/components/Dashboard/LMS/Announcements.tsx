@@ -12,6 +12,8 @@ interface Announcement {
 }
 
 const Announcements: React.FC = () => {
+
+
     const announcements: Announcement[] = [
         {
             id: 1,
@@ -49,9 +51,12 @@ const Announcements: React.FC = () => {
             category: "Content",
             status: "New",
             time: "3d ago",
+            isNew: true,
         },
 
     ];
+
+    const displayedAnnouncements = announcements.slice(0, 3);
 
     const getCategoryColor = (category: Announcement["category"]) => {
         switch (category) {
@@ -67,7 +72,7 @@ const Announcements: React.FC = () => {
     };
 
     return (
-        <div className="trezo-card bg-white dark:bg-[#0c1427] h-full p-[20px] md:p-[25px] rounded-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-[#15203c]">
+        <div className="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-[#15203c]">
 
             <div className="trezo-card-header mb-[20px] pb-4 border-b border-gray-100 dark:border-[#172036] flex items-center justify-between shrink-0">
                 <div className="trezo-card-title">
@@ -81,9 +86,9 @@ const Announcements: React.FC = () => {
                 </Link>
             </div>
 
-            <div className="trezo-card-content flex-grow overflow-y-auto pr-2 custom-scrollbar">
+            <div className="trezo-card-content overflow-y-auto pr-2 custom-scrollbar">
                 <div className="flex flex-col gap-[15px]">
-                    {announcements.map((item) => (
+                    {displayedAnnouncements.map((item) => (
                         <div
                             key={item.id}
                             className="p-[15px] rounded-md border border-gray-100 dark:border-[#172036] hover:bg-gray-50 dark:hover:bg-[#15203c] transition-all group cursor-pointer"

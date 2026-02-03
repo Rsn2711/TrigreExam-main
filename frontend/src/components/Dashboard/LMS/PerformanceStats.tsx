@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const StudentsInterestedTopics: React.FC = () => {
+const PerformanceStats: React.FC = () => {
   return (
     <>
       <div className="trezo-card bg-white dark:bg-[#0c1427] h-full p-[20px] md:p-[25px] rounded-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-[#15203c]">
@@ -145,4 +145,4 @@ const StudentsInterestedTopics: React.FC = () => {
   );
 };
 
-export default StudentsInterestedTopics;
+export default PerformanceStats;

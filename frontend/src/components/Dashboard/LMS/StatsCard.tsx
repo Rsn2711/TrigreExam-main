@@ -20,8 +20,9 @@ const StatsCard: React.FC<StatsCardProps> = ({
       className="
         bg-white dark:bg-[#0c1427]
         h-full
+        w-[90%]       
         rounded-2xl
-        p-[12px]
+        p-[20px]
         shadow-sm
         transition-all duration-300
         hover:-translate-y-1
@@ -42,7 +43,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
       </div>
 
       <div
-        className={`w-[42px] h-[42px] rounded-2xl flex items-center justify-center text-xl dark:bg-[#15203c] ${iconClassName}`}
+        className={`w-[36px] h-[36px] rounded-2xl flex items-center justify-center text-xl dark:bg-[#15203c] ${iconClassName}`}
       >
         <i className="material-symbols-outlined text-[20px]">{icon}</i>
       </div>
