@@ -1,4 +1,3 @@
-import PerformanceStats from "../../components/Dashboard/LMS/PerformanceStats";
 import QuickAccess from "../../components/Dashboard/LMS/QuickAccess";
 import Announcements from "../../components/Dashboard/LMS/Announcements";
 import StatsCard from "../../components/Dashboard/LMS/StatsCard";
@@ -10,174 +9,119 @@ const coursesData: Course[] = [
     id: 1,
     title: "Class 13 (Dropper) Test Series ( X Series...)",
     subtitle: "Complete Test Series 2025",
+    shortDescription: "Comprehensive test series for Class 13 droppers covering all major subjects.",
     image: "/images/courses/neev-course.png",
-    progress: 65,
+
+    // 🔑 ONLY REQUIRED DATA FOR CARD
+    totalVideos: 12,
     completedTests: 13,
     totalTests: 20,
     expiryDate: "Dec 31, 2025",
+
+    progress: 65,
     viewLink: "/lms/course-details",
-    totalVideos: 12,
+
     price: "FREE",
     originalPrice: "₹599",
     discount: "Discount of 100% applied",
-    features: [
-      "Live Test on Sundays only",
-      "Free for all (No batch required)",
-      "Syllabus and details for upcoming test shared by Monday",
-      "Useful for Careerwill Students (Batch Enrollment) – X1, X2, X3",
-      "NTA-like Exam Interface",
-      "Detailed Performance Analysis",
-      "Question Insights + 📌 Bookmark for revision",
-      "Reattempt option available",
-      "Updates in Announcement Section",
-      "Results every Monday at 10:00 AM"
-    ]
+
+    // ❌ NOT USED IN CARD UI ANYMORE
+    features: [],
   },
   {
     id: 2,
     title: "JEE Advanced Chemistry",
     subtitle: "Complete Test Series 2025",
+    shortDescription: "Master Organic, Inorganic, and Physical Chemistry with our advanced test series.",
     image: "/images/courses/neev-course.png",
-    progress: 45,
+    totalVideos: 8,
     completedTests: 9,
     totalTests: 20,
     expiryDate: "Dec 31, 2025",
+    progress: 45,
     viewLink: "/lms/course-details",
-    totalVideos: 8,
     price: "FREE",
     originalPrice: "₹599",
     discount: "Discount of 100% applied",
-    features: [
-      "Live Test on Sundays only",
-      "Free for all (No batch required)",
-      "Syllabus and details for upcoming test shared by Monday",
-      "Useful for Careerwill Students (Batch Enrollment) – X1, X2, X3",
-      "NTA-like Exam Interface",
-      "Detailed Performance Analysis",
-      "Question Insights + 📌 Bookmark for revision",
-      "Reattempt option available",
-      "Updates in Announcement Section",
-      "Results every Monday at 10:00 AM"
-    ]
+    features: [],
   },
   {
     id: 3,
     title: "JEE Advanced Mathematics",
     subtitle: "Complete Test Series 2025",
+    shortDescription: "Boost your problem-solving skills with high-level mathematics questions and solutions.",
     image: "/images/courses/neev-course.png",
-    progress: 30,
+    totalVideos: 15,
     completedTests: 6,
     totalTests: 20,
     expiryDate: "Dec 31, 2025",
+    progress: 30,
     viewLink: "/lms/course-details",
-    totalVideos: 15,
     price: "FREE",
     originalPrice: "₹599",
     discount: "Discount of 100% applied",
-    features: [
-      "Live Test on Sundays only",
-      "Free for all (No batch required)",
-      "Syllabus and details for upcoming test shared by Monday",
-      "Useful for Careerwill Students (Batch Enrollment) – X1, X2, X3",
-      "NTA-like Exam Interface",
-      "Detailed Performance Analysis",
-      "Question Insights + 📌 Bookmark for revision",
-      "Reattempt option available",
-      "Updates in Announcement Section",
-      "Results every Monday at 10:00 AM"
-    ]
+    features: [],
   },
   {
     id: 4,
     title: "NEET Physics",
     subtitle: "Complete Test Series 2025",
     image: "/images/courses/neev-course.png",
-    progress: 80,
+    totalVideos: 20,
     completedTests: 16,
     totalTests: 20,
     expiryDate: "Dec 31, 2025",
+    progress: 80,
     viewLink: "/lms/course-details",
-    totalVideos: 20,
     price: "FREE",
     originalPrice: "₹599",
     discount: "Discount of 100% applied",
-    features: [
-      "Live Test on Sundays only",
-      "Free for all (No batch required)",
-      "Syllabus and details for upcoming test shared by Monday",
-      "Useful for Careerwill Students (Batch Enrollment) – X1, X2, X3",
-      "NTA-like Exam Interface",
-      "Detailed Performance Analysis",
-      "Question Insights + 📌 Bookmark for revision",
-      "Reattempt option available",
-      "Updates in Announcement Section",
-      "Results every Monday at 10:00 AM"
-    ]
+    features: [],
   },
   {
     id: 5,
     title: "NEET Biology",
     subtitle: "Complete Test Series 2025",
     image: "/images/courses/neev-course.png",
-    progress: 20,
+    totalVideos: 10,
     completedTests: 4,
     totalTests: 20,
     expiryDate: "Dec 31, 2025",
+    progress: 20,
     viewLink: "/lms/course-details",
-    totalVideos: 10,
     price: "FREE",
     originalPrice: "₹599",
     discount: "Discount of 100% applied",
-    features: [
-      "Live Test on Sundays only",
-      "Free for all (No batch required)",
-      "Syllabus and details for upcoming test shared by Monday",
-      "Useful for Careerwill Students (Batch Enrollment) – X1, X2, X3",
-      "NTA-like Exam Interface",
-      "Detailed Performance Analysis",
-      "Question Insights + 📌 Bookmark for revision",
-      "Reattempt option available",
-      "Updates in Announcement Section",
-      "Results every Monday at 10:00 AM"
-    ]
+    features: [],
   },
   {
     id: 6,
     title: "NEET Chemistry",
     subtitle: "Complete Test Series 2025",
     image: "/images/courses/neev-course.png",
-    progress: 55,
+    totalVideos: 18,
     completedTests: 11,
     totalTests: 20,
     expiryDate: "Dec 31, 2025",
+    progress: 55,
     viewLink: "/lms/course-details",
-    totalVideos: 18,
     price: "FREE",
     originalPrice: "₹599",
     discount: "Discount of 100% applied",
-    features: [
-      "Live Test on Sundays only",
-      "Free for all (No batch required)",
-      "Syllabus and details for upcoming test shared by Monday",
-      "Useful for Careerwill Students (Batch Enrollment) – X1, X2, X3",
-      "NTA-like Exam Interface",
-      "Detailed Performance Analysis",
-      "Question Insights + 📌 Bookmark for revision",
-      "Reattempt option available",
-      "Updates in Announcement Section",
-      "Results every Monday at 10:00 AM"
-    ]
+    features: [],
   },
 ];
 
 const Lms = () => {
   return (
     <>
+      {/* Welcome Section */}
       <div className="mb-[25px]">
         <Welcome />
       </div>
 
-      <div className="sm:grid sm:grid-cols-3 gap-[15px] mb-[25px]">
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-[25px] mb-[25px]">
         <StatsCard
           title="TOTAL TESTS ATTEMPTED"
           value="24"
@@ -189,6 +133,7 @@ const Lms = () => {
             </span>
           }
         />
+
         <StatsCard
           title="ENROLLED COURSES"
           value="12"
@@ -203,6 +148,7 @@ const Lms = () => {
             </div>
           }
         />
+
         <StatsCard
           title="TOTAL DOCUMENTS"
           value="350"
@@ -216,8 +162,9 @@ const Lms = () => {
         />
       </div>
 
-      <div className="lg:grid lg:grid-cols-3 gap-[25px] mb-[25px]">
-        <div className="lg:col-span-2 h-full">
+      {/* Courses + Sidebar */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-[25px] mb-[25px]">
+        <div className="lg:col-span-2">
           <Courses
             title="Enrolled Courses"
             courses={coursesData}
@@ -225,24 +172,16 @@ const Lms = () => {
           />
         </div>
 
-        <div className="lg:col-span-1 flex flex-col gap-[25px] h-full">
+        <div className="flex flex-col gap-[25px]">
           <QuickAccess />
-          <div className="flex-grow">
-            <Announcements />
-          </div>
+          <Announcements />
         </div>
       </div>
 
+      {/* Explore Courses */}
       <div className="grid grid-cols-1 gap-[15px] mb-[25px]">
-        {/* <Courses title="Featured Courses" courses={coursesData} /> */}
         <Courses title="Explore Courses" courses={coursesData} />
       </div>
-
-      {/* <div className="mb-[25px]">
-        <PerformanceStats />
-      </div> */}
-
-
     </>
   );
 };

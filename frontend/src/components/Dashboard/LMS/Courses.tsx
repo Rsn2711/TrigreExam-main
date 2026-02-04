@@ -31,6 +31,7 @@ export type Course = {
     id: number;
     title: string;
     subtitle: string;
+    shortDescription?: string;
     image: string;
     progress: number;
     totalTests: number;
@@ -119,15 +120,15 @@ const Courses: React.FC<CourseListProps> = ({
 
                                     <div className="flex items-center flex-wrap gap-x-4 gap-y-2 text-[11px] text-gray-500 dark:text-gray-400">
                                         <div className="flex items-center gap-1">
-                                            <i className="material-symbols-outlined text-[14px] text-blue-500">play_circle</i>
+                                            <i className="material-symbols-outlined text-[14px] text-gray-300">play_circle</i>
                                             <span className="font-medium text-gray-700 dark:text-gray-300">{course.totalVideos} Videos</span>
                                         </div>
                                         <div className="flex items-center gap-1">
-                                            <i className="material-symbols-outlined text-[14px] text-blue-500">quiz</i>
+                                            <i className="material-symbols-outlined text-[14px] text-gray-300">quiz</i>
                                             <span className="font-medium text-gray-700 dark:text-gray-300">{course.totalTests} Tests</span>
                                         </div>
                                         <div className="flex items-center gap-1">
-                                            <i className="material-symbols-outlined text-[14px] text-blue-500">event</i>
+                                            <i className="material-symbols-outlined text-[14px] text-gray-300">event</i>
                                             <span className="font-medium text-gray-700 dark:text-gray-300">Exp: {course.expiryDate}</span>
                                         </div>
                                     </div>
@@ -137,7 +138,7 @@ const Courses: React.FC<CourseListProps> = ({
                                 <div className="flex-shrink-0">
                                     <Link
                                         to={course.viewLink}
-                                        className="bg-primary-100 hover:bg-primary-200 text-primary-600 text-[12px] font-semibold px-4 py-2 rounded-lg flex items-center gap-1.5 transition-colors"
+                                        className="bg-white border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white text-[12px] font-semibold px-4 py-2 rounded-lg flex items-center gap-1.5 transition-colors"
                                     >
                                         <i className="material-symbols-outlined text-[16px]">play_arrow</i>
                                         Continue
@@ -165,27 +166,28 @@ const Courses: React.FC<CourseListProps> = ({
                                         {course.title}
                                     </h3>
 
-                                    {/* Features List */}
-                                    {course.features && (
-                                        <ul className="mb-4 space-y-2">
-                                            {course.features.map((feature, index) => (
-                                                <li key={index} className="flex items-start text-[12px] text-gray-600 dark:text-gray-300">
-                                                    <span className="mr-2 mt-0.5">
-                                                        {index === 0 || index === 2 || index === 8 ? (
-                                                            <i className="material-symbols-outlined text-[14px] text-blue-500">calendar_month</i>
-                                                        ) : index === 1 ? (
-                                                            <i className="material-symbols-outlined text-[14px] text-blue-500">sticky_note_2</i>
-                                                        ) : index % 2 === 0 ? (
-                                                            <i className="material-symbols-outlined text-[14px] text-pink-500">target</i>
-                                                        ) : (
-                                                            <i className="material-symbols-outlined text-[14px] text-orange-500">bar_chart</i>
-                                                        )}
-                                                    </span>
-                                                    <span>{feature}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
+                                    {/* Description */}
+                                    {course.shortDescription && (
+                                        <p className="text-[12px] text-gray-500 dark:text-gray-400 mb-3 line-clamp-2">
+                                            {course.shortDescription}
+                                        </p>
                                     )}
+
+                                    {/* Stats Row */}
+                                    <div className="flex items-center flex-wrap gap-x-3 gap-y-2 text-[10px] text-gray-500 dark:text-gray-400 mb-4">
+                                        <div className="flex items-center gap-1">
+                                            <i className="material-symbols-outlined text-[14px] text-gray-300">play_circle</i>
+                                            <span className="font-medium text-gray-700 dark:text-gray-300">{course.totalVideos} Videos</span>
+                                        </div>
+                                        <div className="flex items-center gap-1">
+                                            <i className="material-symbols-outlined text-[14px] text-gray-300">quiz</i>
+                                            <span className="font-medium text-gray-700 dark:text-gray-300">{course.totalTests} Tests</span>
+                                        </div>
+                                        <div className="flex items-center gap-1">
+                                            <i className="material-symbols-outlined text-[14px] text-gray-300">event</i>
+                                            <span className="font-medium text-gray-700 dark:text-gray-300">Exp: {course.expiryDate}</span>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {/* Price & Action Section */}
@@ -207,7 +209,7 @@ const Courses: React.FC<CourseListProps> = ({
                                         <button className="w-full py-2 border border-black dark:border-white text-black dark:text-white font-bold text-[12px] rounded uppercase hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
                                             Detail
                                         </button>
-                                        <button className="w-full py-2 bg-sky-500 text-white font-bold text-[12px] rounded uppercase hover:bg-sky-600 transition-colors">
+                                        <button className="w-full py-2 bg-white border border-sky-500 text-sky-500 font-bold text-[12px] rounded uppercase hover:bg-sky-500 hover:text-white transition-colors">
                                             Buy Now
                                         </button>
                                     </div>

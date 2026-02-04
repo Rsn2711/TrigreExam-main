@@ -20,7 +20,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
       className="
         bg-white dark:bg-[#0c1427]
         h-full
-        w-[90%]       
+        w-full
         rounded-2xl
         p-[20px]
         shadow-sm
@@ -30,15 +30,18 @@ const StatsCard: React.FC<StatsCardProps> = ({
         hover:bg-blue-50
         dark:hover:bg-[#15203c]
         flex items-center justify-between
+        box-border
       "
     >
       <div className="flex flex-col gap-0.5">
-        <span className="block text-gray-500 dark:text-gray-400 text-[10px] font-bold uppercase tracking-wider">
+        <span className="text-gray-500 dark:text-gray-400 text-[10px] font-bold uppercase tracking-wider">
           {title}
         </span>
-        <h3 className="mb-0 text-xl font-bold text-gray-900 dark:text-white mt-0">
+
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
           {value}
         </h3>
+
         {badge}
       </div>
 
