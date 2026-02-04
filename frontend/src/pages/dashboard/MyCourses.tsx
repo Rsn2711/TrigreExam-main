@@ -19,7 +19,7 @@ const courses = [
     completedLessons: 20,
     totalVideos: 150,
     totalTests: 15,
-    expiryDate: "30 Dec 2025",
+    expiryDate: "1 Year",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const courses = [
     completedLessons: 0,
     totalVideos: 100,
     totalTests: 10,
-    expiryDate: "15 Nov 2025",
+    expiryDate: "1 Year",
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const courses = [
     completedLessons: 0,
     totalVideos: 80,
     totalTests: 8,
-    expiryDate: "20 Oct 2025",
+    expiryDate: "1 Year",
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const courses = [
     completedLessons: 0,
     totalVideos: 120,
     totalTests: 12,
-    expiryDate: "05 Dec 2025",
+    expiryDate: "1 Year",
   },
   {
     id: 5,
@@ -59,7 +59,7 @@ const courses = [
     completedLessons: 9,
     totalVideos: 140,
     totalTests: 14,
-    expiryDate: "10 Jan 2026",
+    expiryDate: "1 Year",
   },
   {
     id: 6,
@@ -69,7 +69,7 @@ const courses = [
     completedLessons: 0,
     totalVideos: 40,
     totalTests: 4,
-    expiryDate: "25 Sep 2025",
+    expiryDate: "1 Year",
   },
   {
     id: 7,
@@ -79,7 +79,7 @@ const courses = [
     completedLessons: 0,
     totalVideos: 45,
     totalTests: 5,
-    expiryDate: "15 Oct 2025",
+    expiryDate: "1 Year",
   },
   {
     id: 8,
@@ -89,7 +89,7 @@ const courses = [
     completedLessons: 0,
     totalVideos: 70,
     totalTests: 7,
-    expiryDate: "01 Nov 2025",
+    expiryDate: "1 Year",
   },
   {
     id: 9,
@@ -99,7 +99,7 @@ const courses = [
     completedLessons: 0,
     totalVideos: 200,
     totalTests: 20,
-    expiryDate: "28 Feb 2026",
+    expiryDate: "1 Year",
   },
   {
     id: 10,
@@ -110,7 +110,7 @@ const courses = [
     completedLessons: 0,
     totalVideos: 40,
     totalTests: 5,
-    expiryDate: "12 Dec 2025",
+    expiryDate: "1 Year",
   },
 ];
 
@@ -156,7 +156,7 @@ const MyCourses: React.FC = () => {
                 className={`h-[130px] w-full bg-gray-100 dark:bg-[#172036] flex items-center justify-center relative group overflow-hidden`}
               >
                 <img
-                  src="/images/course-thumbnail.png"
+                  src="/images/course-thum.png"
                   alt={course.title}
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                 />
@@ -187,19 +187,19 @@ const MyCourses: React.FC = () => {
                       <i className="material-symbols-outlined text-[14px] text-gray-300">
                         play_circle
                       </i>
-                      <span>{course.totalVideos} Videos</span>
+                      <span>Total Videos: {course.totalVideos}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <i className="material-symbols-outlined text-[14px] text-gray-300">
                         quiz
                       </i>
-                      <span>{course.totalTests} Tests</span>
+                      <span>Total Tests: {course.totalTests}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <i className="material-symbols-outlined text-[14px] text-gray-300">
                         event
                       </i>
-                      <span>Exp: {course.expiryDate}</span>
+                      <span>Validity: {course.expiryDate}</span>
                     </div>
                   </div>
                 </div>
