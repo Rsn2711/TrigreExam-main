@@ -32,21 +32,30 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         "/front-pages/team",
         "/front-pages/faq",
         "/front-pages/contact",
+        "/lms/video-course-player",
     ].includes(pathname);
+
+    if (isAuthPage) {
+        return (
+            <div key={pathname} className="animate-fade-in-up">
+                {children}
+            </div>
+        );
+    }
 
     return (
         <>
             <div className={`main-content-wrap transition-all ${active ? "active" : ""}`}>
-                {!isAuthPage && <SidebarMenu toggleActive={toggleActive} />}
+                <SidebarMenu toggleActive={toggleActive} />
 
                 <div className="main-content transition-all flex flex-col overflow-hidden min-h-screen">
-                    {!isAuthPage && <Header toggleActive={toggleActive} />}
+                    <Header toggleActive={toggleActive} />
 
                     <div key={pathname} className="animate-fade-in-up">
                         {children}
                     </div>
 
-                    {!isAuthPage && <Footer />}
+                    <Footer />
                 </div>
             </div>
         </>

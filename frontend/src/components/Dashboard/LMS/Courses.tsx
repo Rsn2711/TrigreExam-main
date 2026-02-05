@@ -162,7 +162,7 @@ const Courses: React.FC<CourseListProps> = ({
                             {/* Content Section */}
                             <div className={CARD_THEME[variant].content}>
                                 <div className="p-3">
-                                    <h3 className="text-[14px] font-bold text-black dark:text-white leading-snug mb-3">
+                                    <h3 className="!text-[16px] font-bold text-black dark:text-white leading-tight mb-2">
                                         {course.title}
                                     </h3>
 
@@ -185,7 +185,7 @@ const Courses: React.FC<CourseListProps> = ({
                                         </div>
                                         <div className="flex items-center gap-1">
                                             <i className="material-symbols-outlined text-[14px] text-gray-300">event</i>
-                                            <span className="font-medium text-gray-700 dark:text-gray-300">Exp: {course.expiryDate}</span>
+                                            <span className="font-medium text-gray-700 dark:text-gray-300">Validity 1 year</span>
                                         </div>
                                     </div>
                                 </div>

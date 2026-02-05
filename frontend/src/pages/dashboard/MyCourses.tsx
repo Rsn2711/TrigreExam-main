@@ -14,6 +14,7 @@ const courses = [
     id: 1,
     title:
       "Foundation Program for Competitive Exams (Comprehensive Preparation Course)",
+    type: "Video Course",
     progress: 10,
     totalLessons: 200,
     completedLessons: 20,
@@ -24,6 +25,7 @@ const courses = [
   {
     id: 2,
     title: "Quantitative Aptitude – Advanced Mastery Program",
+    type: "Video Course",
     progress: 0,
     totalLessons: 120,
     completedLessons: 0,
@@ -34,6 +36,7 @@ const courses = [
   {
     id: 3,
     title: "Reasoning & General Intelligence – Complete Course",
+    type: "Video Course",
     progress: 0,
     totalLessons: 100,
     completedLessons: 0,
@@ -44,6 +47,7 @@ const courses = [
   {
     id: 4,
     title: "English Language – Professional Skills Program",
+    type: "Video Course",
     progress: 0,
     totalLessons: 150,
     completedLessons: 0,
@@ -54,6 +58,7 @@ const courses = [
   {
     id: 5,
     title: "General Awareness (GA) – Complete Coverage Course",
+    type: "Test Course",
     progress: 5,
     totalLessons: 180,
     completedLessons: 9,
@@ -64,6 +69,7 @@ const courses = [
   {
     id: 6,
     title: "Mathematics – Booster & Speed Enhancement Course",
+    type: "Test Course",
     progress: 0,
     totalLessons: 50,
     completedLessons: 0,
@@ -74,6 +80,7 @@ const courses = [
   {
     id: 7,
     title: "Reasoning – Fast-Track Intensive Program",
+    type: "Video Course",
     progress: 0,
     totalLessons: 60,
     completedLessons: 0,
@@ -84,6 +91,7 @@ const courses = [
   {
     id: 8,
     title: "English Grammar & Vocabulary – Comprehensive Course",
+    type: "Video Course",
     progress: 0,
     totalLessons: 90,
     completedLessons: 0,
@@ -94,6 +102,7 @@ const courses = [
   {
     id: 9,
     title: "Tier-I & Tier-II – Intensive Crash Course",
+    type: "Test Course",
     progress: 0,
     totalLessons: 250,
     completedLessons: 0,
@@ -105,6 +114,7 @@ const courses = [
     id: 10,
     title:
       "Previous Year Questions (PYQs) – Practice & Analysis Course",
+    type: "Test Course",
     progress: 0,
     totalLessons: 50,
     completedLessons: 0,
@@ -162,8 +172,15 @@ const MyCourses: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <Link
-                    to="#"
-                    className="w-[40px] h-[40px] bg-white rounded-full flex items-center justify-center text-primary-500 hover:bg-primary-500 hover:text-white transition-all"
+                    to={
+                      course.type === "Video Course"
+                        ? "/lms/video-course-player"
+                        : course.type === "Test Course"
+                          ? "/lms/test-course-details"
+                          : "#"
+                    }
+                    state={{ title: course.title, type: course.type }}
+                    className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-900 hover:bg-red-500 hover:text-white transition-colors"
                   >
                     <i className="material-symbols-outlined text-[20px]">
                       play_arrow
@@ -174,6 +191,16 @@ const MyCourses: React.FC = () => {
 
               {/* Content */}
               <div className="p-[12px] flex flex-col flex-grow">
+                <div className="flex items-center gap-2 mb-1">
+                  <span
+                    className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded ${course.type === "Video Course"
+                      ? "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
+                      : "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400"
+                      }`}
+                  >
+                    {course.type}
+                  </span>
+                </div>
                 <h3
                   className={`${CARD_THEME.title} text-black dark:text-white mb-[8px] !text-[15px]`}
                   style={{ fontSize: "15px", lineHeight: "1.4" }}
@@ -220,7 +247,14 @@ const MyCourses: React.FC = () => {
                   </div>
 
                   <Link
-                    to="#"
+                    to={
+                      course.type === "Video Course"
+                        ? "/lms/video-course-player"
+                        : course.type === "Test Course"
+                          ? "/lms/test-course-details"
+                          : "#"
+                    }
+                    state={{ title: course.title, type: course.type }}
                     className={`${CARD_THEME.button} border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white`}
                   >
                     {course.progress === 0
