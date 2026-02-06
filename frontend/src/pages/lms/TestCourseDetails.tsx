@@ -173,7 +173,7 @@ const TestCourseDetails: React.FC = () => {
 
                                     return tests;
                                 })().map((test) => (
-                                    <div key={test.id} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-4 w-full max-w-6xl mx-auto">
+                                    <div key={test.id} className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-2 w-full max-w-4xl mx-auto">
                                         <div className="flex items-start gap-3">
                                             <div className="w-10 h-8 border border-gray-300 rounded flex items-center justify-center shrink-0">
                                                 <i className="material-symbols-outlined text-gray-700 text-xl">movie</i>
@@ -240,7 +240,7 @@ const TestCourseDetails: React.FC = () => {
 
                                 return liveTests;
                             })().map((test) => (
-                                <div key={test.id} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-4 w-full max-w-6xl mx-auto">
+                                <div key={test.id} className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-2 w-full max-w-4xl mx-auto">
                                     <div className="flex items-start gap-3">
                                         <div className="w-10 h-8 border border-gray-300 rounded flex items-center justify-center shrink-0">
                                             <i className="material-symbols-outlined text-gray-700 text-xl">sensors</i>
