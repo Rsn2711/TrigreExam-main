@@ -53,6 +53,9 @@ import EditCourse from "./pages/lms/EditCourse";
 import Instructors from "./pages/lms/Instructors";
 import VideoCoursePlayer from "./pages/lms/VideoCoursePlayer";
 import TestCourseDetails from "./pages/lms/TestCourseDetails";
+import LiveTestPage from "./pages/lms/LiveTestPage";
+import TestResultPage from "./pages/lms/TestResultPage";
+import TestInstructionsPage from "./pages/lms/TestInstructionsPage";
 
 // Helpdesk Pages
 import Tickets from "./pages/helpdesk/Tickets";
@@ -228,6 +231,9 @@ const App: React.FC = () => {
                 <Route path="/lms/instructors" element={<Instructors />} />
                 <Route path="/lms/video-course-player" element={<VideoCoursePlayer />} />
                 <Route path="/lms/test-course-details" element={<TestCourseDetails />} />
+                <Route path="/lms/live-test" element={<LiveTestPage />} />
+                <Route path="/lms/test-result" element={<TestResultPage />} />
+                <Route path="/lms/test-instructions" element={<TestInstructionsPage />} />
 
                 {/* Helpdesk Pages */}
                 <Route path="/helpdesk/tickets" element={<Tickets />} />

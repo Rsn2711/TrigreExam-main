@@ -179,7 +179,7 @@ const MyCourses: React.FC = () => {
                           ? "/lms/test-course-details"
                           : "#"
                     }
-                    state={{ title: course.title, type: course.type }}
+                    state={{ title: course.title, type: course.type, courseData: course }}
                     className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-900 hover:bg-red-500 hover:text-white transition-colors"
                   >
                     <i className="material-symbols-outlined text-[20px]">
@@ -254,7 +254,7 @@ const MyCourses: React.FC = () => {
                           ? "/lms/test-course-details"
                           : "#"
                     }
-                    state={{ title: course.title, type: course.type }}
+                    state={{ title: course.title, type: course.type, courseData: course }}
                     className={`${CARD_THEME.button} border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white`}
                   >
                     {course.progress === 0

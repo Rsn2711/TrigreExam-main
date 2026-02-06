@@ -4,9 +4,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 const VideoCoursePlayer: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { title } = location.state || { title: "Course Title" }; // Fallback title
+    const { title, type, courseData } = location.state || {
+        title: "Course Title",
+        type: "Video Course",
+        courseData: null
+    };
     const [activeTab, setActiveTab] = useState("modules");
-    const [expandedModule, setExpandedModule] = useState<number | null>(1);
+    const [expandedModule, setExpandedModule] = useState<number | null>(null);
 
     // Sidebar Resizer
     const [sidebarWidth, setSidebarWidth] = useState(350);
@@ -80,33 +84,99 @@ const VideoCoursePlayer: React.FC = () => {
     // In a real app, this would come from the active item
     const videoSrc = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
-    const modules = [
-        {
-            id: 1,
-            title: "Module 1: Introduction",
-            items: [
-                { id: 1, title: "Course Overview", type: "video", duration: "10:00", active: true },
-                { id: 2, title: "Syllabus & Study Plan", type: "doc", duration: "5 min read" },
-            ],
-        },
-        {
-            id: 2,
-            title: "Module 2: Core Concepts",
-            items: [
-                { id: 3, title: "Basics Explained", type: "video", duration: "45:00" },
-                { id: 4, title: "Important Formulas", type: "video", duration: "30:00" },
-                { id: 5, title: "Formula Sheet", type: "doc", duration: "10 min read" },
-            ],
-        },
-        {
-            id: 3,
-            title: "Module 3: Practice & Tests",
-            items: [
-                { id: 6, title: "Topic-wise Practice Test", type: "test", duration: "30 mins" },
-                { id: 7, title: "Mini Mock Test", type: "test", duration: "1 hour" },
-            ],
-        },
-    ];
+    // Generate dynamic modules based on course data
+    const generateModules = () => {
+        if (!courseData) {
+            // Fallback to default modules if no course data
+            return [
+                {
+                    id: 1,
+                    title: "Module 1: Introduction",
+                    items: [
+                        { id: 1, title: "Course Overview", type: "video", duration: "10:00", active: true },
+                        { id: 2, title: "Syllabus & Study Plan", type: "doc", duration: "5 min read" },
+                    ],
+                },
+                {
+                    id: 2,
+                    title: "Module 2: Core Concepts",
+                    items: [
+                        { id: 3, title: "Basics Explained", type: "video", duration: "45:00" },
+                        { id: 4, title: "Important Formulas", type: "video", duration: "30:00" },
+                        { id: 5, title: "Formula Sheet", type: "doc", duration: "10 min read" },
+                    ],
+                },
+                {
+                    id: 3,
+                    title: "Module 3: Practice & Tests",
+                    items: [
+                        { id: 6, title: "Topic-wise Practice Test", type: "test", duration: "30 mins" },
+                        { id: 7, title: "Mini Mock Test", type: "test", duration: "1 hour" },
+                    ],
+                },
+            ];
+        }
+
+        const modules = [];
+        const videosPerModule = 10;
+        const testsPerModule = 3;
+
+        // Calculate number of modules needed
+        const videoModules = Math.ceil(courseData.totalVideos / videosPerModule);
+        const testModules = Math.ceil(courseData.totalTests / testsPerModule);
+
+        let itemId = 1;
+        let moduleId = 1;
+
+        // Generate video modules
+        for (let i = 0; i < videoModules; i++) {
+            const videosInThisModule = Math.min(videosPerModule, courseData.totalVideos - (i * videosPerModule));
+            const items = [];
+
+            for (let j = 0; j < videosInThisModule; j++) {
+                const lessonNumber = (i * videosPerModule) + j + 1;
+                items.push({
+                    id: itemId++,
+                    title: `Lesson ${lessonNumber}: ${title.split(' ')[0]} Concepts`,
+                    type: "video",
+                    duration: `${Math.floor(Math.random() * 30 + 15)}:00`,
+                    active: i === 0 && j === 0 // First video is active
+                });
+            }
+
+            modules.push({
+                id: moduleId++,
+                title: `Module ${i + 1}: Core Content`,
+                items
+            });
+        }
+
+        // Generate test modules
+        for (let i = 0; i < testModules; i++) {
+            const testsInThisModule = Math.min(testsPerModule, courseData.totalTests - (i * testsPerModule));
+            const items = [];
+
+            for (let j = 0; j < testsInThisModule; j++) {
+                const testNumber = (i * testsPerModule) + j + 1;
+                items.push({
+                    id: itemId++,
+                    title: `Test ${testNumber}: Assessment`,
+                    type: "test",
+                    duration: `${Math.floor(Math.random() * 60 + 30)} mins`
+                });
+            }
+
+            modules.push({
+                id: moduleId++,
+                title: `Module ${videoModules + i + 1}: Practice & Tests`,
+                items
+            });
+        }
+
+        return modules;
+    };
+
+    const modules = generateModules();
 
     const handleModuleClick = (id: number) => {
         setExpandedModule(expandedModule === id ? null : id);
@@ -251,7 +321,7 @@ const VideoCoursePlayer: React.FC = () => {
                     </div>
                     {/* Tabs */}
                     <div className="flex border-b border-gray-200 dark:border-[#172036]">
-                        {["modules", "announcements", "more"].map((tab) => (
+                        {["modules", "live classes"].map((tab) => (
                             <button
                                 key={tab}
                                 className={`flex-1 py-4 text-sm font-semibold border-b-2 transition-all capitalize ${activeTab === tab
@@ -333,10 +403,100 @@ const VideoCoursePlayer: React.FC = () => {
                                 ))}
                             </div>
                         )}
-                        {activeTab !== "modules" && (
-                            <div className="flex flex-col items-center justify-center h-40 text-gray-500 gap-2">
-                                <i className="material-symbols-outlined text-4xl opacity-20">inventory_2</i>
-                                <p className="text-sm">No content available</p>
+                        {activeTab === "live classes" && (
+                            <div className="flex flex-col gap-3 p-4">
+                                {[
+                                    {
+                                        id: 1,
+                                        title: "Physics - Laws of Motion",
+                                        instructor: "Dr. Sharma",
+                                        time: "2:00 PM - 3:30 PM",
+                                        date: "Feb 15, 2026",
+                                        students: 145,
+                                        status: "live"
+                                    },
+                                    {
+                                        id: 2,
+                                        title: "Chemistry - Organic Reactions",
+                                        instructor: "Prof. Gupta",
+                                        time: "4:00 PM - 5:30 PM",
+                                        date: "Mar 8, 2026",
+                                        students: 98,
+                                        status: "upcoming"
+                                    },
+                                    {
+                                        id: 3,
+                                        title: "Mathematics - Calculus Basics",
+                                        instructor: "Dr. Verma",
+                                        time: "6:00 PM - 7:30 PM",
+                                        date: "Apr 22, 2026",
+                                        students: 203,
+                                        status: "upcoming"
+                                    },
+                                    {
+                                        id: 4,
+                                        title: "Biology - Cell Structure",
+                                        instructor: "Dr. Patel",
+                                        time: "10:00 AM - 11:30 AM",
+                                        date: "May 10, 2026",
+                                        students: 167,
+                                        status: "scheduled"
+                                    }
+                                ].map((liveClass) => (
+                                    <div
+                                        key={liveClass.id}
+                                        className="bg-white dark:bg-[#1e293b] border border-gray-200 dark:border-[#2d3a52] rounded-lg p-1 hover:shadow-md transition-all cursor-pointer group hover:border-blue-400 dark:hover:border-blue-500"
+                                    >
+                                        <div className="flex items-start justify-between mb-0.5">
+                                            <div className="flex-1">
+                                                <p className="text-[16px] font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 leading-none">
+                                                    {liveClass.title}
+                                                </p>
+
+                                                <p className="text-[10px] text-gray-500 dark:text-gray-400">
+                                                    {liveClass.instructor}
+                                                </p>
+                                            </div>
+                                            {liveClass.status === "live" && (
+                                                <div className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 px-1.5 py-0.5 rounded-full">
+                                                    <span className="relative flex h-1.5 w-1.5">
+                                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                                                    </span>
+                                                    <span className="text-[9px] font-bold text-red-600 dark:text-red-400 uppercase tracking-wide">Live</span>
+                                                </div>
+                                            )}
+                                            {liveClass.status === "upcoming" && (
+                                                <span className="text-[9px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-1.5 py-0.5 rounded-full uppercase tracking-wide">
+                                                    Upcoming
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className="flex items-center gap-1.5 text-[10px] text-gray-600 dark:text-gray-400 mb-1">
+                                            <div className="flex items-center gap-0.5">
+                                                <i className="material-symbols-outlined text-[14px]">schedule</i>
+                                                <span>{liveClass.time}</span>
+                                            </div>
+                                            <span className="w-0.5 h-0.5 rounded-full bg-gray-300"></span>
+                                            <div className="flex items-center gap-0.5">
+                                                <i className="material-symbols-outlined text-[14px]">calendar_today</i>
+                                                <span>{liveClass.date}</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center justify-between pt-1 border-t border-gray-100 dark:border-[#2d3a52]">
+                                            <div className="flex items-center gap-0.5 text-[10px] text-gray-500 dark:text-gray-400">
+                                                <i className="material-symbols-outlined text-[14px]">group</i>
+                                                <span>{liveClass.students} students</span>
+                                            </div>
+                                            <button className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors flex items-center gap-0.5">
+                                                {liveClass.status === "live" ? "Join Now" : "Set Reminder"}
+                                                <i className="material-symbols-outlined text-[12px]">
+                                                    {liveClass.status === "live" ? "arrow_forward" : "notifications"}
+                                                </i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         )}
                     </div>
@@ -548,24 +708,6 @@ const VideoCoursePlayer: React.FC = () => {
                                         <i className="material-symbols-outlined text-lg">arrow_forward</i>
                                     </button>
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* Description/Tabs below video */}
-                        <div className="border-t border-gray-100 dark:border-[#1e293b] pt-8 px-2">
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Lesson Description</h3>
-                            <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed space-y-4">
-                                <p>
-                                    Welcome to the course! In this introductory video, we will go over the course structure, what you can expect to learn, and how to make the most out of your study sessions. We will cover the key modules including the core concepts, advanced problem-solving techniques, and time management strategies for the exam.
-                                </p>
-                                <p>
-                                    <strong>Key takeaways from this lesson:</strong>
-                                </p>
-                                <ul className="list-disc pl-5 space-y-2">
-                                    <li>Understanding the exam pattern and syllabus breakdown.</li>
-                                    <li>Setting up a personalized study schedule.</li>
-                                    <li>Resources and tools you will need for preparation.</li>
-                                </ul>
                             </div>
                         </div>
                     </div>
