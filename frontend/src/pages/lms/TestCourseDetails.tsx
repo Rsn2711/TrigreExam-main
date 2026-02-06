@@ -28,6 +28,13 @@ const TestCourseDetails: React.FC = () => {
         }
     }, [activeTab, title, courseData]);
 
+    // Sync activeTab from location state when it changes
+    useEffect(() => {
+        if (location.state?.activeTab) {
+            setActiveTab(location.state.activeTab);
+        }
+    }, [location.state]);
+
     // Handler to start a test
     const handleStartTest = (testId: string, testTitle: string, questions: number, marks: number, minutes: number) => {
         navigate('/lms/test-instructions', {
@@ -69,7 +76,7 @@ const TestCourseDetails: React.FC = () => {
             <main className="flex-1 w-full px-6 py-8">
                 {/* Title Section */}
                 <div className="mb-6">
-                    <h1 className="text-3xl font-bold text-gray-900 mt-1">
+                    <h1 className="text-2xl font-bold text-gray-900 mt-1">
                         {title}
                     </h1>
                     <div className="h-px w-full bg-gray-200"></div>
@@ -81,7 +88,7 @@ const TestCourseDetails: React.FC = () => {
 
                     <button
                         onClick={() => setActiveTab("all-tests")}
-                        className={`px-6 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === "all-tests"
+                        className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-colors ${activeTab === "all-tests"
                             ? "bg-blue-600 text-white shadow-sm"
                             : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                             }`}
@@ -90,7 +97,7 @@ const TestCourseDetails: React.FC = () => {
                     </button>
                     <button
                         onClick={() => setActiveTab("live-tests")}
-                        className={`px-6 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === "live-tests"
+                        className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-colors ${activeTab === "live-tests"
                             ? "bg-blue-600 text-white shadow-sm"
                             : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                             }`}
@@ -107,13 +114,13 @@ const TestCourseDetails: React.FC = () => {
                     activeTab === "all-tests" && (
                         <div className="flex flex-col gap-6">
                             {/* Series Header Card */}
-                            <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-4 flex items-center gap-4">
-                                <div className="w-12 h-12 flex items-center justify-center bg-gray-200 rounded-md">
-                                    <i className="material-symbols-outlined text-gray-500 text-3xl">description</i>
+                            <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-3 flex items-center gap-3">
+                                <div className="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md">
+                                    <i className="material-symbols-outlined text-gray-500 text-2xl">description</i>
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-bold text-gray-800">{title} - Test Series</h3>
-                                    <span className="text-xs bg-white border border-gray-200 px-2 py-0.5 rounded text-gray-600 mt-1 inline-block">Total Tests {courseData?.totalTests || 2}</span>
+                                    <h3 className="text-base font-bold text-gray-800">{title} - Test Series</h3>
+                                    <span className="text-[10px] bg-white border border-gray-200 px-2 py-0.5 rounded text-gray-600 mt-1 inline-block">Total Tests {courseData?.totalTests || 2}</span>
                                 </div>
                             </div>
 
@@ -166,14 +173,14 @@ const TestCourseDetails: React.FC = () => {
 
                                     return tests;
                                 })().map((test) => (
-                                    <div key={test.id} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-6 w-full max-w-6xl mx-auto">
-                                        <div className="flex items-start gap-4">
-                                            <div className="w-12 h-10 border border-gray-300 rounded flex items-center justify-center shrink-0">
-                                                <i className="material-symbols-outlined text-gray-700">movie</i>
+                                    <div key={test.id} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-4 w-full max-w-6xl mx-auto">
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-10 h-8 border border-gray-300 rounded flex items-center justify-center shrink-0">
+                                                <i className="material-symbols-outlined text-gray-700 text-xl">movie</i>
                                             </div>
                                             <div>
-                                                <h4 className="text-lg font-bold text-gray-800 mb-1">{test.title}</h4>
-                                                <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 mb-2">
+                                                <h4 className="text-sm font-bold text-gray-800 mb-1">{test.title}</h4>
+                                                <div className="flex flex-wrap items-center gap-2 text-xs text-gray-600 mb-1.5">
                                                     <span>{test.questions} Questions</span>
                                                     <span className="text-gray-300">|</span>
                                                     <span>{test.marks} Marks</span>
@@ -182,14 +189,14 @@ const TestCourseDetails: React.FC = () => {
                                                     <span className="text-gray-300">|</span>
                                                     <span>{test.type}</span>
                                                 </div>
-                                                <div className="flex items-center gap-2 text-sm text-gray-500">
-                                                    <i className="material-symbols-outlined text-[18px]">calendar_month</i>
+                                                <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                                                    <i className="material-symbols-outlined text-[16px]">calendar_month</i>
                                                     <span>{test.date}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div>
-                                            <button className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded font-medium text-sm transition-colors uppercase tracking-wide">
+                                            <button className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-1.5 rounded font-medium text-xs transition-colors uppercase tracking-wide">
                                                 Start Test
                                             </button>
                                         </div>
@@ -233,27 +240,27 @@ const TestCourseDetails: React.FC = () => {
 
                                 return liveTests;
                             })().map((test) => (
-                                <div key={test.id} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-6 w-full max-w-6xl mx-auto">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-12 h-10 border border-gray-300 rounded flex items-center justify-center shrink-0">
-                                            <i className="material-symbols-outlined text-gray-700">sensors</i>
+                                <div key={test.id} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-4 w-full max-w-6xl mx-auto">
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-10 h-8 border border-gray-300 rounded flex items-center justify-center shrink-0">
+                                            <i className="material-symbols-outlined text-gray-700 text-xl">sensors</i>
                                         </div>
                                         <div>
                                             <div className="flex items-center gap-2 mb-1">
-                                                <h4 className="text-lg font-bold text-gray-800">{test.title}</h4>
+                                                <h4 className="text-sm font-bold text-gray-800">{test.title}</h4>
                                                 {test.isLive ? (
-                                                    <span className="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1">
-                                                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
+                                                    <span className="bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+                                                        <span className="w-1 h-1 bg-white rounded-full animate-pulse"></span>
                                                         LIVE
                                                     </span>
                                                 ) : (
-                                                    <span className="bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1">
-                                                        <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
+                                                    <span className="bg-green-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+                                                        <span className="w-1 h-1 bg-white rounded-full"></span>
                                                         UPCOMING
                                                     </span>
                                                 )}
                                             </div>
-                                            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 mb-2">
+                                            <div className="flex flex-wrap items-center gap-2 text-xs text-gray-600 mb-1.5">
                                                 <span>{test.questions} Questions</span>
                                                 <span className="text-gray-300">|</span>
                                                 <span>{test.marks} Marks</span>
@@ -262,8 +269,8 @@ const TestCourseDetails: React.FC = () => {
                                                 <span className="text-gray-300">|</span>
                                                 <span>{test.type}</span>
                                             </div>
-                                            <div className="flex items-center gap-2 text-sm text-gray-500">
-                                                <i className="material-symbols-outlined text-[18px]">calendar_month</i>
+                                            <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                                                <i className="material-symbols-outlined text-[16px]">calendar_month</i>
                                                 <span>{test.date}</span>
                                             </div>
                                         </div>
@@ -278,15 +285,15 @@ const TestCourseDetails: React.FC = () => {
                                                     <div className="flex gap-2">
                                                         <button
                                                             onClick={() => handleViewReport(testId, test.title)}
-                                                            className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded font-medium text-sm transition-colors uppercase tracking-wide"
+                                                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded font-medium text-xs transition-colors uppercase tracking-wide"
                                                         >
-                                                            View Report
+                                                            VIEW REPORT
                                                         </button>
                                                         <button
                                                             onClick={() => handleDeleteReport(testId)}
-                                                            className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded font-medium text-sm transition-colors uppercase tracking-wide"
+                                                            className="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded font-medium text-xs transition-colors uppercase tracking-wide"
                                                         >
-                                                            Delete Report
+                                                            DELETE REPORT
                                                         </button>
                                                     </div>
                                                 );
@@ -294,9 +301,9 @@ const TestCourseDetails: React.FC = () => {
                                                 return (
                                                     <button
                                                         onClick={() => handleStartTest(testId, test.title, test.questions, test.marks, test.minutes)}
-                                                        className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded font-medium text-sm transition-colors uppercase tracking-wide"
+                                                        className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-1.5 rounded font-medium text-xs transition-colors uppercase tracking-wide"
                                                     >
-                                                        Start Test
+                                                        START TEST
                                                     </button>
                                                 );
                                             }
