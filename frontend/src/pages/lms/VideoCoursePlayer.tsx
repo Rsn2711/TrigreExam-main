@@ -9,7 +9,7 @@ const VideoCoursePlayer: React.FC = () => {
         type: "Video Course",
         courseData: null
     };
-    const [activeTab, setActiveTab] = useState("modules");
+    const [activeTab, setActiveTab] = useState("contents");
     const [expandedModule, setExpandedModule] = useState<number | null>(null);
 
     // Sidebar Resizer
@@ -321,7 +321,7 @@ const VideoCoursePlayer: React.FC = () => {
                     </div>
                     {/* Tabs */}
                     <div className="flex border-b border-gray-200 dark:border-[#172036]">
-                        {["modules", "live classes"].map((tab) => (
+                        {["contents", "live classes"].map((tab) => (
                             <button
                                 key={tab}
                                 className={`flex-1 py-4 text-sm font-semibold border-b-2 transition-all capitalize ${activeTab === tab
@@ -337,7 +337,7 @@ const VideoCoursePlayer: React.FC = () => {
 
                     {/* Module List */}
                     <div className="flex-1 overflow-y-auto sidebar-custom-scrollbar">
-                        {activeTab === "modules" && (
+                        {activeTab === "contents" && (
                             <div className="flex flex-col">
                                 {modules.map((module) => (
                                     <div key={module.id} className="border-b border-gray-100 dark:border-[#172036]">
@@ -506,7 +506,8 @@ const VideoCoursePlayer: React.FC = () => {
                 <div className="flex-1 overflow-y-auto bg-white dark:bg-[#0f172a] p-4 md:p-8">
                     <div className="max-w-6xl mx-auto">
                         {/* Video Player Container */}
-                        <div className="bg-black rounded-xl overflow-hidden shadow-2xl relative mb-6 group aspect-video ring-1 ring-gray-900/5 w-full">
+                       <div className="bg-black rounded-xl overflow-hidden shadow-2xl relative mb-6 group aspect-video ring-1 ring-gray-900/5 w-full h-[80%]">
+
                             <video
                                 ref={videoRef}
                                 src={videoSrc}

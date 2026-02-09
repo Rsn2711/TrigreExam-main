@@ -39,6 +39,7 @@ export type Course = {
     expiryDate: string;
     viewLink: string;
     totalVideos: number;
+    courseType?: "video" | "test";
     price?: string;
     originalPrice?: string;
     discount?: string;

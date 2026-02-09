@@ -69,41 +69,41 @@ const TestCourseDetails: React.FC = () => {
 
 
     return (
-        <div className="bg-white dark:bg-[#0c1427] font-sans flex flex-col h-full"> {/* Added simple white background */}
+        <div className="bg-white dark:bg-[#0c1427] font-body flex flex-col h-full"> {/* Added simple white background */}
             {/* Navbar / Header Removed */}
 
             {/* Main Content */}
             <main className="flex-1 w-full px-6 py-8">
                 {/* Title Section */}
                 <div className="mb-6">
-                    <h1 className="text-2xl font-bold text-gray-900 mt-1">
+                    <h1 className="!text-[20px] font-bold text-gray-900 leading-tight">
                         {title}
                     </h1>
                     <div className="h-px w-full bg-gray-200"></div>
                 </div>
 
                 {/* Tabs */}
-                <div className="flex w-full gap-4 mb-8">
-
-
-                    <button
-                        onClick={() => setActiveTab("all-tests")}
-                        className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-colors ${activeTab === "all-tests"
-                            ? "bg-blue-600 text-white shadow-sm"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                            }`}
-                    >
-                        All Tests
-                    </button>
-                    <button
-                        onClick={() => setActiveTab("live-tests")}
-                        className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-colors ${activeTab === "live-tests"
-                            ? "bg-blue-600 text-white shadow-sm"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                            }`}
-                    >
-                        Live Tests
-                    </button>
+                <div className="flex w-full mb-8">
+                    <div className="inline-flex bg-gray-100/80 p-1 rounded-xl border border-gray-200/50">
+                        <button
+                            onClick={() => setActiveTab("all-tests")}
+                            className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${activeTab === "all-tests"
+                                ? "bg-white text-blue-600 shadow-sm ring-1 ring-black/5"
+                                : "text-gray-500 hover:text-gray-700 hover:bg-gray-200/50"
+                                }`}
+                        >
+                            All Tests
+                        </button>
+                        <button
+                            onClick={() => setActiveTab("live-tests")}
+                            className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${activeTab === "live-tests"
+                                ? "bg-white text-blue-600 shadow-sm ring-1 ring-black/5"
+                                : "text-gray-500 hover:text-gray-700 hover:bg-gray-200/50"
+                                }`}
+                        >
+                            Live Tests
+                        </button>
+                    </div>
                 </div>
 
                 {/* Content Area */}
@@ -113,15 +113,14 @@ const TestCourseDetails: React.FC = () => {
                 {
                     activeTab === "all-tests" && (
                         <div className="flex flex-col gap-6">
-                            {/* Series Header Card */}
-                            <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-3 flex items-center gap-3">
-                                <div className="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md">
-                                    <i className="material-symbols-outlined text-gray-500 text-2xl">description</i>
+                            <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-1.5 flex items-center justify-between gap-3">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-md">
+                                        <i className="material-symbols-outlined text-gray-500 text-lg">description</i>
+                                    </div>
+                                    <h3 className="text-sm font-bold text-gray-800">{title.split('–')[0].trim()} Test Series</h3>
                                 </div>
-                                <div>
-                                    <h3 className="text-base font-bold text-gray-800">{title} - Test Series</h3>
-                                    <span className="text-[10px] bg-white border border-gray-200 px-2 py-0.5 rounded text-gray-600 mt-1 inline-block">Total Tests {courseData?.totalTests || 2}</span>
-                                </div>
+                                <span className="text-sm font-extrabold text-blue-600 bg-white border border-blue-100 px-3 py-1 rounded shadow-sm">Total Tests: {courseData?.totalTests || 2}</span>
                             </div>
 
                             {/* Test Lists */}
@@ -173,31 +172,41 @@ const TestCourseDetails: React.FC = () => {
 
                                     return tests;
                                 })().map((test) => (
-                                    <div key={test.id} className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-2 w-full max-w-4xl mx-auto">
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-10 h-8 border border-gray-300 rounded flex items-center justify-center shrink-0">
-                                                <i className="material-symbols-outlined text-gray-700 text-xl">movie</i>
+                                    <div key={test.id} className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-transparent hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-1 w-full max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
+                                        <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-2xl"></div>
+
+                                        <div className="flex items-center gap-4 w-full md:w-auto">
+                                            <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                                <i className="material-symbols-outlined text-[26px]">description</i>
                                             </div>
-                                            <div>
-                                                <h4 className="text-sm font-bold text-gray-800 mb-1">{test.title}</h4>
-                                                <div className="flex flex-wrap items-center gap-2 text-xs text-gray-600 mb-1.5">
-                                                    <span>{test.questions} Questions</span>
-                                                    <span className="text-gray-300">|</span>
-                                                    <span>{test.marks} Marks</span>
-                                                    <span className="text-gray-300">|</span>
-                                                    <span>{test.minutes} Mins</span>
-                                                    <span className="text-gray-300">|</span>
-                                                    <span>{test.type}</span>
-                                                </div>
-                                                <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                                                    <i className="material-symbols-outlined text-[16px]">calendar_month</i>
-                                                    <span>{test.date}</span>
+                                            <div className="flex-1">
+                                                <h4 className="!text-[20px] font-bold text-gray-900 group-hover:text-blue-700 transition-colors mb-1">{test.title}</h4>
+
+                                                <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 font-medium">
+                                                    <span className="group/item hover:text-blue-600 transition-colors">
+                                                        {test.questions} Questions
+                                                    </span>
+                                                    <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+                                                    <span className="group/item hover:text-amber-600 transition-colors">
+                                                        {test.marks} Marks
+                                                    </span>
+                                                    <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+                                                    <span className="group/item hover:text-purple-600 transition-colors">
+                                                        {test.minutes} Mins
+                                                    </span>
+
                                                 </div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <button className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-1.5 rounded font-medium text-xs transition-colors uppercase tracking-wide">
-                                                Start Test
+
+                                        <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end pl-[4rem] md:pl-0">
+                                            <div className="flex items-center gap-1.5 text-xs font-medium text-gray-400 bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
+                                                <i className="material-symbols-outlined text-[14px]">calendar_today</i>
+                                                <span>{test.date.split('(')[0]}</span>
+                                            </div>
+
+                                            <button className="bg-white border border-blue-200 text-blue-600 group-hover:bg-blue-600 group-hover:text-white group-hover:border-transparent px-5 py-2 rounded-lg text-xs font-bold transition-all duration-300 shadow-sm group-hover:shadow-blue-200 hover:scale-105 active:scale-95 uppercase tracking-wider">
+                                                Start
                                             </button>
                                         </div>
                                     </div>
@@ -240,74 +249,86 @@ const TestCourseDetails: React.FC = () => {
 
                                 return liveTests;
                             })().map((test) => (
-                                <div key={test.id} className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-2 w-full max-w-4xl mx-auto">
-                                    <div className="flex items-start gap-3">
-                                        <div className="w-10 h-8 border border-gray-300 rounded flex items-center justify-center shrink-0">
-                                            <i className="material-symbols-outlined text-gray-700 text-xl">sensors</i>
+                                <div key={test.id} className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-transparent hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-1 w-full max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
+                                    <div className={`absolute top-0 left-0 w-1 h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-2xl ${test.isLive ? 'bg-red-500' : 'bg-green-500'}`}></div>
+
+                                    <div className="flex items-center gap-4 w-full md:w-auto">
+                                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 ${test.isLive ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-600'}`}>
+                                            <i className="material-symbols-outlined text-[26px]">sensors</i>
                                         </div>
-                                        <div>
+                                        <div className="flex-1">
                                             <div className="flex items-center gap-2 mb-1">
-                                                <h4 className="text-sm font-bold text-gray-800">{test.title}</h4>
+                                                <h4 className="!text-[20px] font-bold text-gray-900 group-hover:text-blue-700 transition-colors">{test.title}</h4>
                                                 {test.isLive ? (
-                                                    <span className="bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
-                                                        <span className="w-1 h-1 bg-white rounded-full animate-pulse"></span>
+                                                    <span className="bg-red-100 text-red-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-red-200 flex items-center gap-1">
+                                                        <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
                                                         LIVE
                                                     </span>
                                                 ) : (
-                                                    <span className="bg-green-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
-                                                        <span className="w-1 h-1 bg-white rounded-full"></span>
+                                                    <span className="bg-green-100 text-green-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-green-200">
                                                         UPCOMING
                                                     </span>
                                                 )}
                                             </div>
-                                            <div className="flex flex-wrap items-center gap-2 text-xs text-gray-600 mb-1.5">
-                                                <span>{test.questions} Questions</span>
-                                                <span className="text-gray-300">|</span>
-                                                <span>{test.marks} Marks</span>
-                                                <span className="text-gray-300">|</span>
-                                                <span>{test.minutes} Mins</span>
-                                                <span className="text-gray-300">|</span>
-                                                <span>{test.type}</span>
-                                            </div>
-                                            <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                                                <i className="material-symbols-outlined text-[16px]">calendar_month</i>
-                                                <span>{test.date}</span>
+
+                                            <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 font-medium">
+                                                <span className="group/item hover:text-blue-600 transition-colors">
+                                                    {test.questions} Questions
+                                                </span>
+                                                <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+                                                <span className="group/item hover:text-amber-600 transition-colors">
+                                                    {test.marks} Marks
+                                                </span>
+                                                <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+                                                <span className="group/item hover:text-purple-600 transition-colors">
+                                                    {test.minutes} Mins
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
-                                        {(() => {
-                                            const testId = `${title}-test-${test.id}`;
-                                            const isCompleted = testStates[testId] || false;
 
-                                            if (isCompleted) {
-                                                return (
-                                                    <div className="flex gap-2">
+                                    <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end pl-[4rem] md:pl-0">
+                                        <div className="flex items-center gap-1.5 text-xs font-medium text-gray-400 bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
+                                            <i className="material-symbols-outlined text-[14px]">calendar_today</i>
+                                            <span>{test.date.split('(')[0]}</span>
+                                        </div>
+                                        <div>
+                                            {(() => {
+                                                const testId = `${title}-test-${test.id}`;
+                                                // Assuming isCompleted logic is handled correctly in the original code, 
+                                                // just wrapping buttons with new styles
+                                                const isCompleted = testStates[testId] || false;
+
+                                                if (isCompleted) {
+                                                    return (
+                                                        <div className="flex gap-2">
+                                                            <button
+                                                                onClick={() => handleViewReport(testId, test.title)}
+                                                                className="bg-green-50 text-green-600 border border-green-200 hover:bg-green-600 hover:text-white px-4 py-2 rounded-lg text-xs font-bold transition-all duration-300 uppercase tracking-wide"
+                                                            >
+                                                                Result
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleDeleteReport(testId)}
+                                                                className="bg-red-50 text-red-600 border border-red-200 hover:bg-red-600 hover:text-white px-3 py-2 rounded-lg transition-all duration-300"
+                                                                title="Delete Result"
+                                                            >
+                                                                <i className="material-symbols-outlined text-[18px]">delete</i>
+                                                            </button>
+                                                        </div>
+                                                    );
+                                                } else {
+                                                    return (
                                                         <button
-                                                            onClick={() => handleViewReport(testId, test.title)}
-                                                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded font-medium text-xs transition-colors uppercase tracking-wide"
+                                                            onClick={() => handleStartTest(testId, test.title, test.questions, test.marks, test.minutes)}
+                                                            className="bg-white border border-blue-200 text-blue-600 group-hover:bg-blue-600 group-hover:text-white group-hover:border-transparent px-5 py-2 rounded-lg text-xs font-bold transition-all duration-300 shadow-sm group-hover:shadow-blue-200 hover:scale-105 active:scale-95 uppercase tracking-wider"
                                                         >
-                                                            VIEW REPORT
+                                                            Start
                                                         </button>
-                                                        <button
-                                                            onClick={() => handleDeleteReport(testId)}
-                                                            className="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded font-medium text-xs transition-colors uppercase tracking-wide"
-                                                        >
-                                                            DELETE REPORT
-                                                        </button>
-                                                    </div>
-                                                );
-                                            } else {
-                                                return (
-                                                    <button
-                                                        onClick={() => handleStartTest(testId, test.title, test.questions, test.marks, test.minutes)}
-                                                        className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-1.5 rounded font-medium text-xs transition-colors uppercase tracking-wide"
-                                                    >
-                                                        START TEST
-                                                    </button>
-                                                );
-                                            }
-                                        })()}
+                                                    );
+                                                }
+                                            })()}
+                                        </div>
                                     </div>
                                 </div>
                             ))}

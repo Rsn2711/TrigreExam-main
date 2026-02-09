@@ -3,25 +3,20 @@
 /* Dark mode variant */
 @custom-variant dark (&:where([class=dark], [class=dark] *));
 
+/* ============================================
+   UNIFIED TYPOGRAPHY SYSTEM
+   ============================================
+   Single font family: Montserrat
+   Loaded via Google Fonts in index.html
+   Applied globally to all text elements
+   ============================================ */
+
 /* Design tokens */
 @theme {
-  --font-body: "Montserrat", sans-serif;
+  /* Typography - Single font family for entire application */
+  --font-body: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-  --text-xs: 12px;
-  --text-sm: 13px;
-  --text-base: 14px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 24px;
-  --text-2xl: 28px;
-}
-
-
-
-@custom-variant dark (&:where([class=dark], [class=dark] *));
-
-@theme {
-  --font-body: "Montserrat", sans-serif;
+  /* Font sizes */
   --text-xs: 12px;
   --text-sm: 13px;
   --text-base: 14px;
@@ -32,6 +27,8 @@
   --text-3xl: 32px;
   --text-4xl: 36px;
   --text-5xl: 40px;
+
+  /* Color palette */
   --color-white: #ffffff;
   --color-black: #3a4252;
   --color-dark: #000000;
@@ -198,7 +195,11 @@
   animation: fadeInUp 0.5s ease-out forwards;
 }
 
-/** Body */
+/* ============================================
+   GLOBAL TYPOGRAPHY APPLICATION
+   ============================================ */
+
+/** Root and Body - Base font application */
 html,
 body {
   @apply font-body text-sm md:text-base !p-0 !overflow-y-auto text-gray-500 bg-gray-50 leading-normal;
@@ -208,8 +209,104 @@ body {
   }
 }
 
-button {
+/* Ensure all elements inherit font family */
+* {
+  font-family: var(--font-body);
+}
+
+/* Text elements */
+p,
+span,
+div,
+section,
+article,
+aside,
+main,
+header,
+footer,
+nav {
+  font-family: var(--font-body);
+}
+
+/* Links */
+a {
+  font-family: var(--font-body);
+}
+
+/* Buttons - all variants */
+button,
+.btn,
+[type="button"],
+[type="submit"],
+[type="reset"] {
   @apply focus-visible:outline-none;
+  font-family: var(--font-body);
+}
+
+/* Form elements */
+input,
+textarea,
+select,
+option,
+label {
+  font-family: var(--font-body);
+}
+
+/* Specific input types */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"] {
+  font-family: var(--font-body);
+}
+
+/* Lists */
+ul,
+ol,
+li {
+  font-family: var(--font-body);
+}
+
+/* Tables */
+table,
+thead,
+tbody,
+tfoot,
+tr,
+th,
+td {
+  font-family: var(--font-body);
+}
+
+/* Code and pre (if you want them to use Montserrat too) */
+/* Uncomment if you want monospace elements to also use Montserrat */
+/* code, pre, kbd, samp {
+  font-family: var(--font-body);
+} */
+
+/* Cards and modals */
+.card,
+.modal,
+.dialog {
+  font-family: var(--font-body);
+}
+
+/* Navigation */
+.nav,
+.navbar,
+.menu {
+  font-family: var(--font-body);
+}
+
+/* Footer */
+.footer {
+  font-family: var(--font-body);
 }
 
 /** Paragraph */
@@ -2392,6 +2489,7 @@ html[dir="rtl"] {
     }
   }
 }
+
 /* ===================== */
 /* WELCOME PAGE ANIMATION */
 /* ===================== */
@@ -2401,6 +2499,7 @@ html[dir="rtl"] {
     opacity: 0;
     transform: translateY(14px) scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -2417,6 +2516,7 @@ html[dir="rtl"] {
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -2427,15 +2527,33 @@ html[dir="rtl"] {
   animation: fadeOnly 500ms ease-out both;
 }
 
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-500 { animation-delay: 500ms; }
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
 
 /* floating background blobs */
 @keyframes floatSlow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 .animate-float-slow {
