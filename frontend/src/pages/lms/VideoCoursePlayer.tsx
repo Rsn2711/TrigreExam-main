@@ -13,7 +13,7 @@ const VideoCoursePlayer: React.FC = () => {
     const [expandedModule, setExpandedModule] = useState<number | null>(null);
 
     // Sidebar Resizer
-    const [sidebarWidth, setSidebarWidth] = useState(350);
+    const [sidebarWidth, setSidebarWidth] = useState(400);
     const isResizingRef = useRef(false);
 
     const startResizing = React.useCallback(() => {
@@ -408,7 +408,7 @@ const VideoCoursePlayer: React.FC = () => {
                                 {[
                                     {
                                         id: 1,
-                                        title: "Physics - Laws of Motion",
+                                        title: "Laws of Motion",
                                         instructor: "Dr. Sharma",
                                         time: "2:00 PM - 3:30 PM",
                                         date: "Feb 15, 2026",
@@ -417,7 +417,7 @@ const VideoCoursePlayer: React.FC = () => {
                                     },
                                     {
                                         id: 2,
-                                        title: "Chemistry - Organic Reactions",
+                                        title: "Organic Reactions",
                                         instructor: "Prof. Gupta",
                                         time: "4:00 PM - 5:30 PM",
                                         date: "Mar 8, 2026",
@@ -426,7 +426,7 @@ const VideoCoursePlayer: React.FC = () => {
                                     },
                                     {
                                         id: 3,
-                                        title: "Mathematics - Calculus Basics",
+                                        title: "Calculus Basics",
                                         instructor: "Dr. Verma",
                                         time: "6:00 PM - 7:30 PM",
                                         date: "Apr 22, 2026",
@@ -435,65 +435,48 @@ const VideoCoursePlayer: React.FC = () => {
                                     },
                                     {
                                         id: 4,
-                                        title: "Biology - Cell Structure",
+                                        title: "Cell Structure",
                                         instructor: "Dr. Patel",
                                         time: "10:00 AM - 11:30 AM",
                                         date: "May 10, 2026",
                                         students: 167,
-                                        status: "scheduled"
+                                        status: "upcoming"
                                     }
                                 ].map((liveClass) => (
                                     <div
                                         key={liveClass.id}
-                                        className="bg-white dark:bg-[#1e293b] border border-gray-200 dark:border-[#2d3a52] rounded-lg p-1 hover:shadow-md transition-all cursor-pointer group hover:border-blue-400 dark:hover:border-blue-500"
+                                        className="bg-white dark:bg-[#1e293b] border border-gray-200 dark:border-[#2d3a52] rounded-lg p-1 hover:bg-gray-50 dark:hover:bg-[#0f172a] transition-all cursor-pointer group"
                                     >
-                                        <div className="flex items-start justify-between mb-0.5">
+                                        <div className="flex gap-3 items-center">
+                                            <div className="w-[50px] h-[50px] rounded-lg shrink-0 overflow-hidden flex items-center justify-center bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">
+                                                <i className="material-symbols-outlined text-[28px]">smart_display</i>
+                                            </div>
                                             <div className="flex-1">
-                                                <p className="text-[16px] font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 leading-none">
-                                                    {liveClass.title}
-                                                </p>
-
-                                                <p className="text-[10px] text-gray-500 dark:text-gray-400">
-                                                    {liveClass.instructor}
-                                                </p>
-                                            </div>
-                                            {liveClass.status === "live" && (
-                                                <div className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 px-1.5 py-0.5 rounded-full">
-                                                    <span className="relative flex h-1.5 w-1.5">
-                                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
-                                                    </span>
-                                                    <span className="text-[9px] font-bold text-red-600 dark:text-red-400 uppercase tracking-wide">Live</span>
+                                                <div className="flex items-center justify-between">
+                                                    <p className="text-[15px] font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 leading-none">
+                                                        {liveClass.title}
+                                                    </p>
+                                                    {liveClass.status === "live" && (
+                                                        <div className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 px-1.5 py-0.5 rounded-full shrink-0">
+                                                            <span className="relative flex h-1.5 w-1.5">
+                                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                                                            </span>
+                                                            <span className="text-[9px] font-bold text-red-600 dark:text-red-400 uppercase tracking-wide">Live</span>
+                                                        </div>
+                                                    )}
+                                                    {liveClass.status === "upcoming" && (
+                                                        <span className="text-[9px] font-semibold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-1.5 py-0.5 rounded-full uppercase tracking-wide shrink-0">
+                                                            Upcoming
+                                                        </span>
+                                                    )}
                                                 </div>
-                                            )}
-                                            {liveClass.status === "upcoming" && (
-                                                <span className="text-[9px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-1.5 py-0.5 rounded-full uppercase tracking-wide">
-                                                    Upcoming
-                                                </span>
-                                            )}
-                                        </div>
-                                        <div className="flex items-center gap-1.5 text-[10px] text-gray-600 dark:text-gray-400 mb-1">
-                                            <div className="flex items-center gap-0.5">
-                                                <i className="material-symbols-outlined text-[14px]">schedule</i>
-                                                <span>{liveClass.time}</span>
+                                                <div className="flex items-center gap-1.5 text-[10px] text-gray-600 dark:text-gray-400 -mt-1 mb-1">
+                                                    <span>{liveClass.time}</span>
+                                                    <span className="w-px h-3 bg-gray-600 dark:bg-gray-300"></span>
+                                                    <span>{liveClass.date}</span>
+                                                </div>
                                             </div>
-                                            <span className="w-0.5 h-0.5 rounded-full bg-gray-300"></span>
-                                            <div className="flex items-center gap-0.5">
-                                                <i className="material-symbols-outlined text-[14px]">calendar_today</i>
-                                                <span>{liveClass.date}</span>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center justify-between pt-1 border-t border-gray-100 dark:border-[#2d3a52]">
-                                            <div className="flex items-center gap-0.5 text-[10px] text-gray-500 dark:text-gray-400">
-                                                <i className="material-symbols-outlined text-[14px]">group</i>
-                                                <span>{liveClass.students} students</span>
-                                            </div>
-                                            <button className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors flex items-center gap-0.5">
-                                                {liveClass.status === "live" ? "Join Now" : "Set Reminder"}
-                                                <i className="material-symbols-outlined text-[12px]">
-                                                    {liveClass.status === "live" ? "arrow_forward" : "notifications"}
-                                                </i>
-                                            </button>
                                         </div>
                                     </div>
                                 ))}
@@ -506,7 +489,7 @@ const VideoCoursePlayer: React.FC = () => {
                 <div className="flex-1 overflow-y-auto bg-white dark:bg-[#0f172a] p-4 md:p-8">
                     <div className="max-w-6xl mx-auto">
                         {/* Video Player Container */}
-                       <div className="bg-black rounded-xl overflow-hidden shadow-2xl relative mb-6 group aspect-video ring-1 ring-gray-900/5 w-full h-[80%]">
+                        <div className="bg-black rounded-xl overflow-hidden shadow-2xl relative mb-6 group aspect-video ring-1 ring-gray-900/5 w-full h-[80%]">
 
                             <video
                                 ref={videoRef}
@@ -714,7 +697,7 @@ const VideoCoursePlayer: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
