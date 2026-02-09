@@ -486,10 +486,10 @@ const VideoCoursePlayer: React.FC = () => {
                 </div>
 
                 {/* Content Area */}
-                <div className="flex-1 overflow-y-auto bg-white dark:bg-[#0f172a] p-4 md:p-8">
+                <div className="flex-1 overflow-y-auto bg-white dark:bg-[#0f172a] px-4 md:px-6 lg:px-8 pb-4 md:pb-6 lg:pb-8 pt-2">
                     <div className="max-w-6xl mx-auto">
                         {/* Video Player Container */}
-                        <div className="bg-black rounded-xl overflow-hidden shadow-2xl relative mb-6 group aspect-video ring-1 ring-gray-900/5 w-full h-[80%]">
+                        <div className="bg-black rounded-xl overflow-hidden shadow-2xl relative mb-5 group aspect-video ring-1 ring-gray-900/5 w-full max-h-[75vh]">
 
                             <video
                                 ref={videoRef}
@@ -660,7 +660,7 @@ const VideoCoursePlayer: React.FC = () => {
                         </div>
 
                         {/* Action Bar */}
-                        <div className="mb-8 px-2">
+                        <div className="mb-4 px-2">
                             <div className="flex flex-col md:flex-row items-start justify-between gap-6">
                                 <div className="flex-1">
                                     <div className="flex items-center gap-2 mb-3">
@@ -670,7 +670,7 @@ const VideoCoursePlayer: React.FC = () => {
                                         </span>
                                         <span className="text-xs font-bold tracking-widest text-gray-500 uppercase">Now Playing</span>
                                     </div>
-                                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight">Course Overview</h2>
+                                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">Course Overview</h2>
                                     <div className="flex items-center gap-4 text-sm text-gray-500 font-medium">
                                         <div className="flex items-center gap-1.5">
                                             <i className="material-symbols-outlined text-[18px]">videocam</i>
