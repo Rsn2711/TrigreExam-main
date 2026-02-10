@@ -153,7 +153,7 @@ const VideoCoursePlayer: React.FC = () => {
 
         // Generate test modules
         for (let i = 0; i < testModules; i++) {
-            const testsInThisModule = Math.min(testsPerModule, courseData.totalTests - (i * testsPerModule));
+            const testsInThisModule = Math.min(testsPerModule, courseData.totalTests - (i * testModules));
             const items = [];
 
             for (let j = 0; j < testsInThisModule; j++) {
@@ -372,9 +372,17 @@ const VideoCoursePlayer: React.FC = () => {
                                                                     <i className="material-symbols-outlined text-white text-[14px] font-bold">check</i>
                                                                 </div>
                                                             ) : (
-                                                                <i className={`material-symbols-outlined text-lg ${item.active ? 'text-blue-600' : 'text-gray-400'}`}>
-                                                                    {item.type === 'video' ? 'play_circle' : item.type === 'test' ? 'quiz' : 'description'}
-                                                                </i>
+                                                                item.type === 'video' ? (
+                                                                    <img
+                                                                        src="/images/play.png"
+                                                                        alt="play"
+                                                                        className="w-[18px] h-[18px] object-contain"
+                                                                    />
+                                                                ) : item.type === 'test' ? (
+                                                                    <i className="material-symbols-outlined text-lg text-gray-400">quiz</i>
+                                                                ) : (
+                                                                    <i className="material-symbols-outlined text-lg text-gray-400">description</i>
+                                                                )
                                                             )}
                                                         </div>
                                                         <div className="flex flex-col gap-1">
@@ -447,26 +455,30 @@ const VideoCoursePlayer: React.FC = () => {
                                         key={liveClass.id}
                                         className="bg-white dark:bg-[#1e293b] border border-gray-200 dark:border-[#2d3a52] rounded-lg p-1 hover:bg-gray-50 dark:hover:bg-[#0f172a] transition-all cursor-pointer group"
                                     >
-                                        <div className="flex gap-3 items-center">
+                                        <div className="flex gap-3 items-start p-2">
                                             <div className="w-[50px] h-[50px] rounded-lg shrink-0 overflow-hidden flex items-center justify-center bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">
-                                                <i className="material-symbols-outlined text-[28px]">smart_display</i>
+                                                <img
+                                                    src="/images/play.png"
+                                                    alt="play"
+                                                    className="w-[28px] h-[28px] object-contain"
+                                                />
                                             </div>
                                             <div className="flex-1">
-                                                <div className="flex items-center justify-between">
-                                                    <p className="text-[15px] font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 leading-none">
+                                                <div className="flex items-start justify-between">
+                                                    <p className="text-[15px] font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 leading-tight">
                                                         {liveClass.title}
                                                     </p>
                                                     {liveClass.status === "live" && (
-                                                        <div className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 px-1.5 py-0.5 rounded-full shrink-0">
-                                                            <span className="relative flex h-1.5 w-1.5">
+                                                        <div className="flex items-center gap-1.5 bg-red-50 dark:bg-red-900/30 px-2 py-0.5 rounded-full shrink-0 border border-red-200 dark:border-red-800 shadow-sm animate-pulse">
+                                                            <span className="relative flex h-2 w-2">
                                                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]"></span>
                                                             </span>
-                                                            <span className="text-[9px] font-bold text-red-600 dark:text-red-400 uppercase tracking-wide">Live</span>
+                                                            <span className="text-[10px] font-bold text-red-600 dark:text-red-400 uppercase tracking-widest">Live</span>
                                                         </div>
                                                     )}
                                                     {liveClass.status === "upcoming" && (
-                                                        <span className="text-[9px] font-semibold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-1.5 py-0.5 rounded-full uppercase tracking-wide shrink-0">
+                                                        <span className="text-[9px] font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full uppercase tracking-widest shrink-0 border border-green-200 dark:border-green-800">
                                                             Upcoming
                                                         </span>
                                                     )}
@@ -514,7 +526,7 @@ const VideoCoursePlayer: React.FC = () => {
                             )}
 
                             {/* Controls Overlay */}
-                            <div className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}>
+                            <div className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-300 ${showControls || !isPlaying ? "opacity-100" : "opacity-0"}`}>
 
                                 {/* Progress Bar */}
                                 <div className="relative h-1.5 bg-gray-600/50 rounded-full mb-4 cursor-pointer group/progress">
@@ -649,7 +661,7 @@ const VideoCoursePlayer: React.FC = () => {
                                             )}
                                             <button
                                                 onClick={() => setShowSettings(!showSettings)}
-                                                className={`transition-colors rounded-full w-8 h-8 flex items-center justify-center ${showSettings ? 'bg-white/20 text-white' : 'hover:bg-white/10 hover:text-blue-400'}`}
+                                                className={`transition-colors rounded-full w-8 h-8 flex items-center justify-center ${showSettings ? "bg-white/20 text-white" : "hover:bg-white/10 hover:text-blue-400"}`}
                                             >
                                                 <i className="material-symbols-outlined text-2xl">more_vert</i>
                                             </button>
@@ -697,7 +709,7 @@ const VideoCoursePlayer: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

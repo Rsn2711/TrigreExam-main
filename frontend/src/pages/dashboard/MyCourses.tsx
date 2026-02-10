@@ -8,6 +8,11 @@ const CARD_THEME = {
     "mt-[10px] block w-full text-center py-[6px] rounded-md border font-medium transition-all text-sm",
 };
 
+// Helper function to get random image
+const getRandomImage = () => {
+  const images = ["/images/cat.webp", "/images/upsc.webp", "/images/ssc.png"];
+  return images[Math.floor(Math.random() * images.length)];
+};
 
 const courses = [
   {
@@ -29,7 +34,7 @@ const courses = [
     progress: 0,
     totalLessons: 5,
     completedLessons: 0,
-    totalVideos: 10 ,
+    totalVideos: 10,
     totalTests: 3,
     expiryDate: "1 Year",
   },
@@ -57,7 +62,7 @@ const courses = [
   },
   {
     id: 5,
-    title: "General Awareness (GA) – Complete Coverage Course",
+    title: "General ",
     type: "Test Course",
     progress: 5,
     totalLessons: 5,
@@ -121,7 +126,7 @@ const MyCourses: React.FC = () => {
                 className={`h-[130px] w-full bg-gray-100 dark:bg-[#172036] flex items-center justify-center relative group overflow-hidden`}
               >
                 <img
-                  src="/images/course-thum.png"
+                  src={getRandomImage()}
                   alt={course.title}
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                 />
@@ -164,21 +169,23 @@ const MyCourses: React.FC = () => {
                 </h3>
 
                 <div className="mb-[10px]">
-                  <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
-                    <div className="flex items-center gap-1">
-                      <i className="material-symbols-outlined text-[14px] text-gray-300">
-                        play_circle
-                      </i>
+                  <div className="flex flex-nowrap justify-between gap-1.5 text-[11px] text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center gap-0.5 whitespace-nowrap">
+                      <img
+                        src="/images/play.png"
+                        alt="play"
+                        className="w-[13px] h-[13px] object-contain"
+                      />
                       <span>Total Videos: {course.totalVideos}</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <i className="material-symbols-outlined text-[14px] text-gray-300">
+                    <div className="flex items-center gap-0.5 whitespace-nowrap">
+                      <i className="material-symbols-outlined text-[13px] text-gray-300">
                         quiz
                       </i>
                       <span>Total Tests: {course.totalTests}</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <i className="material-symbols-outlined text-[14px] text-gray-300">
+                    <div className="flex items-center gap-0.5 whitespace-nowrap">
+                      <i className="material-symbols-outlined text-[13px] text-gray-300">
                         event
                       </i>
                       <span>Validity: {course.expiryDate}</span>
@@ -210,11 +217,19 @@ const MyCourses: React.FC = () => {
                           : "#"
                     }
                     state={{ title: course.title, type: course.type, courseData: course }}
-                    className={`${CARD_THEME.button} border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white`}
+                    className="mt-[12px] flex items-center justify-center gap-2 w-full py-[10px] rounded-lg font-semibold text-sm bg-white dark:bg-[#0c1427] border-2 border-primary-500 text-primary-500 shadow-sm hover:bg-gradient-to-r hover:from-primary-500 hover:to-primary-600 hover:text-white hover:border-transparent hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    {course.progress === 0
-                      ? "Start Course"
-                      : "Continue Learning"}
+                    {course.progress === 0 ? (
+                      <>
+                        <i className="material-symbols-outlined text-[18px]">play_arrow</i>
+                        <span>Start Course</span>
+                      </>
+                    ) : (
+                      <>
+                        <i className="material-symbols-outlined text-[18px]">school</i>
+                        <span>Continue Learning</span>
+                      </>
+                    )}
                   </Link>
                 </div>
               </div>

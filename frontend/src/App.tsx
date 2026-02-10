@@ -17,6 +17,7 @@ import Analytics from "./pages/dashboard/Analytics";
 import School from "./pages/dashboard/School";
 import Saas from "./pages/dashboard/Saas";
 import MyResults from "./pages/dashboard/MyResults";
+import TestReport from "./pages/dashboard/TestReport";
 import MyCourses from "./pages/dashboard/MyCourses";
 import MyPurchases from "./pages/dashboard/MyPurchases";
 import Announcements from "./pages/dashboard/Announcements";
@@ -179,6 +180,7 @@ const App: React.FC = () => {
                 <Route path="/dashboard/school" element={<School />} />
                 <Route path="/dashboard/saas" element={<Saas />} />
                 <Route path="/my-results" element={<MyResults />} />
+                <Route path="/dashboard/test-report" element={<TestReport />} />
                 <Route path="/my-courses" element={<MyCourses />} />
                 <Route path="/my-purchases" element={<MyPurchases />} />
                 <Route path="/announcements" element={<Announcements />} />

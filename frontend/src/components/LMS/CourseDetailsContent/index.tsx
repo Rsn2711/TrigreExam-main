@@ -135,9 +135,8 @@ const CourseDetailsContent: React.FC = () => {
                 <div className="toc-accordion" id="tablesOfContentAccordion">
                   <div className="toc-accordion-item bg-gray-50 dark:bg-[#15203c] rounded-md text-black dark:text-white mb-[10px] last:mb-0">
                     <button
-                      className={`toc-accordion-button open text-base md:text-[15px] py-[19px] px-[20px] md:px-[25px] block w-full ltr:text-left rtl:text-right font-semibold relative ${
-                        openIndex === 0 ? "open" : ""
-                      }`}
+                      className={`toc-accordion-button open text-base md:text-[15px] py-[19px] px-[20px] md:px-[25px] block w-full ltr:text-left rtl:text-right font-semibold relative ${openIndex === 0 ? "open" : ""
+                        }`}
                       type="button"
                       onClick={() => toggleAccordion(0)}
                     >
@@ -146,9 +145,8 @@ const CourseDetailsContent: React.FC = () => {
                     </button>
 
                     <div
-                      className={`toc-accordion-collapse px-[20px] md:px-[25px] pb-[18px] ${
-                        openIndex === 0 ? "open" : "hidden"
-                      }`}
+                      className={`toc-accordion-collapse px-[20px] md:px-[25px] pb-[18px] ${openIndex === 0 ? "open" : "hidden"
+                        }`}
                     >
                       <ul>
                         <li className="border-b border-gray-100 sm:flex items-center justify-between py-[12px] md:py-[15px] dark:border-[#1c2846] first:pt-0 last:border-0 last:pb-0">
@@ -227,9 +225,8 @@ const CourseDetailsContent: React.FC = () => {
 
                   <div className="toc-accordion-item bg-gray-50 dark:bg-[#15203c] rounded-md text-black dark:text-white mb-[10px] last:mb-0">
                     <button
-                      className={`toc-accordion-button open text-base md:text-[15px] py-[19px] px-[20px] md:px-[25px] block w-full ltr:text-left rtl:text-right font-semibold relative ${
-                        openIndex === 1 ? "open" : ""
-                      }`}
+                      className={`toc-accordion-button open text-base md:text-[15px] py-[19px] px-[20px] md:px-[25px] block w-full ltr:text-left rtl:text-right font-semibold relative ${openIndex === 1 ? "open" : ""
+                        }`}
                       type="button"
                       onClick={() => toggleAccordion(1)}
                     >
@@ -237,9 +234,8 @@ const CourseDetailsContent: React.FC = () => {
                       <i className="ri-arrow-down-s-line absolute top-1/2 -translate-y-1/2 ltr:right-[20px] rtl:left-[20px] md:ltr:right-[25px] md:rtl:left-[25px] text-[20px]"></i>
                     </button>
                     <div
-                      className={`toc-accordion-collapse px-[20px] md:px-[25px] pb-[18px] ${
-                        openIndex === 1 ? "open" : "hidden"
-                      }`}
+                      className={`toc-accordion-collapse px-[20px] md:px-[25px] pb-[18px] ${openIndex === 1 ? "open" : "hidden"
+                        }`}
                     >
                       <ul>
                         <li className="border-b border-gray-100 sm:flex items-center justify-between py-[12px] md:py-[15px] dark:border-[#1c2846] first:pt-0 last:border-0 last:pb-0">
@@ -261,9 +257,11 @@ const CourseDetailsContent: React.FC = () => {
                             href="javascript:void(0);"
                             className="relative inline-block text-gray-500 dark:text-gray-400 transition-all hover:text-primary-500 ltr:pl-[27px] rtl:pr-[27px]"
                           >
-                            <i className="material-symbols-outlined absolute ltr:left-0 rtl:right-0 !text-[20px] -mt-[.5px] text-primary-500 top-1/2 -translate-y-1/2">
-                              play_circle
-                            </i>
+                            <img
+                              src="/images/play.png"
+                              alt="play"
+                              className="absolute ltr:left-0 rtl:right-0 w-[20px] h-[20px] object-contain mt-[2px] top-1/2 -translate-y-1/2"
+                            />
                             Introduction to Wired and Wireless Networks
                           </a>
                           <span className="block text-gray-500 dark:text-gray-400 mt-[10px] sm:mt-0">
@@ -306,9 +304,8 @@ const CourseDetailsContent: React.FC = () => {
 
                   <div className="toc-accordion-item bg-gray-50 dark:bg-[#15203c] rounded-md text-black dark:text-white mb-[10px] last:mb-0">
                     <button
-                      className={`toc-accordion-button open text-base md:text-[15px] py-[19px] px-[20px] md:px-[25px] block w-full ltr:text-left rtl:text-right font-semibold relative ${
-                        openIndex === 2 ? "open" : ""
-                      }`}
+                      className={`toc-accordion-button open text-base md:text-[15px] py-[19px] px-[20px] md:px-[25px] block w-full ltr:text-left rtl:text-right font-semibold relative ${openIndex === 2 ? "open" : ""
+                        }`}
                       type="button"
                       onClick={() => toggleAccordion(2)}
                     >
@@ -317,9 +314,8 @@ const CourseDetailsContent: React.FC = () => {
                     </button>
 
                     <div
-                      className={`toc-accordion-collapse px-[20px] md:px-[25px] pb-[18px] ${
-                        openIndex === 2 ? "open" : "hidden"
-                      }`}
+                      className={`toc-accordion-collapse px-[20px] md:px-[25px] pb-[18px] ${openIndex === 2 ? "open" : "hidden"
+                        }`}
                     >
                       <ul>
                         <li className="border-b border-gray-100 sm:flex items-center justify-between py-[12px] md:py-[15px] dark:border-[#1c2846] first:pt-0 last:border-0 last:pb-0">
@@ -341,9 +337,11 @@ const CourseDetailsContent: React.FC = () => {
                             href="javascript:void(0);"
                             className="relative inline-block text-gray-500 dark:text-gray-400 transition-all hover:text-primary-500 ltr:pl-[27px] rtl:pr-[27px]"
                           >
-                            <i className="material-symbols-outlined absolute ltr:left-0 rtl:right-0 !text-[20px] -mt-[.5px] text-primary-500 top-1/2 -translate-y-1/2">
-                              play_circle
-                            </i>
+                            <img
+                              src="/images/play.png"
+                              alt="play"
+                              className="absolute ltr:left-0 rtl:right-0 w-[20px] h-[20px] object-contain mt-[2px] top-1/2 -translate-y-1/2"
+                            />
                             E-Mail: Overview and Importance
                           </a>
                           <span className="block text-gray-500 dark:text-gray-400 mt-[10px] sm:mt-0">
@@ -384,9 +382,8 @@ const CourseDetailsContent: React.FC = () => {
 
                   <div className="toc-accordion-item bg-gray-50 dark:bg-[#15203c] rounded-md text-black dark:text-white mb-[10px] last:mb-0">
                     <button
-                      className={`toc-accordion-button open text-base md:text-[15px] py-[19px] px-[20px] md:px-[25px] block w-full ltr:text-left rtl:text-right font-semibold relative ${
-                        openIndex === 3 ? "open" : ""
-                      }`}
+                      className={`toc-accordion-button open text-base md:text-[15px] py-[19px] px-[20px] md:px-[25px] block w-full ltr:text-left rtl:text-right font-semibold relative ${openIndex === 3 ? "open" : ""
+                        }`}
                       type="button"
                       onClick={() => toggleAccordion(3)}
                     >
@@ -394,9 +391,8 @@ const CourseDetailsContent: React.FC = () => {
                       <i className="ri-arrow-down-s-line absolute top-1/2 -translate-y-1/2 ltr:right-[20px] rtl:left-[20px] md:ltr:right-[25px] md:rtl:left-[25px] text-[20px]"></i>
                     </button>
                     <div
-                      className={`toc-accordion-collapse px-[20px] md:px-[25px] pb-[18px] ${
-                        openIndex === 3 ? "open" : "hidden"
-                      }`}
+                      className={`toc-accordion-collapse px-[20px] md:px-[25px] pb-[18px] ${openIndex === 3 ? "open" : "hidden"
+                        }`}
                     >
                       <ul>
                         <li className="border-b border-gray-100 sm:flex items-center justify-between py-[12px] md:py-[15px] dark:border-[#1c2846] first:pt-0 last:border-0 last:pb-0">
@@ -418,9 +414,11 @@ const CourseDetailsContent: React.FC = () => {
                             href="javascript:void(0);"
                             className="relative inline-block text-gray-500 dark:text-gray-400 transition-all hover:text-primary-500 ltr:pl-[27px] rtl:pr-[27px]"
                           >
-                            <i className="material-symbols-outlined absolute ltr:left-0 rtl:right-0 !text-[20px] -mt-[.5px] text-primary-500 top-1/2 -translate-y-1/2">
-                              play_circle
-                            </i>
+                            <img
+                              src="/images/play.png"
+                              alt="play"
+                              className="absolute ltr:left-0 rtl:right-0 w-[20px] h-[20px] object-contain mt-[2px] top-1/2 -translate-y-1/2"
+                            />
                             Exploring Web-Based Threats
                           </a>
                           <span className="block text-gray-500 dark:text-gray-400 mt-[10px] sm:mt-0">
@@ -475,9 +473,8 @@ const CourseDetailsContent: React.FC = () => {
 
                   <div className="toc-accordion-item bg-gray-50 dark:bg-[#15203c] rounded-md text-black dark:text-white mb-[10px] last:mb-0">
                     <button
-                      className={`toc-accordion-button open text-base md:text-[15px] py-[19px] px-[20px] md:px-[25px] block w-full ltr:text-left rtl:text-right font-semibold relative ${
-                        openIndex === 4 ? "open" : ""
-                      }`}
+                      className={`toc-accordion-button open text-base md:text-[15px] py-[19px] px-[20px] md:px-[25px] block w-full ltr:text-left rtl:text-right font-semibold relative ${openIndex === 4 ? "open" : ""
+                        }`}
                       type="button"
                       onClick={() => toggleAccordion(4)}
                     >
@@ -486,9 +483,8 @@ const CourseDetailsContent: React.FC = () => {
                     </button>
 
                     <div
-                      className={`toc-accordion-collapse px-[20px] md:px-[25px] pb-[18px] ${
-                        openIndex === 4 ? "open" : "hidden"
-                      }`}
+                      className={`toc-accordion-collapse px-[20px] md:px-[25px] pb-[18px] ${openIndex === 4 ? "open" : "hidden"
+                        }`}
                     >
                       <ul>
                         <li className="border-b border-gray-100 sm:flex items-center justify-between py-[12px] md:py-[15px] dark:border-[#1c2846] first:pt-0 last:border-0 last:pb-0">
@@ -510,9 +506,11 @@ const CourseDetailsContent: React.FC = () => {
                             href="javascript:void(0);"
                             className="relative inline-block text-gray-500 dark:text-gray-400 transition-all hover:text-primary-500 ltr:pl-[27px] rtl:pr-[27px]"
                           >
-                            <i className="material-symbols-outlined absolute ltr:left-0 rtl:right-0 !text-[20px] -mt-[.5px] text-primary-500 top-1/2 -translate-y-1/2">
-                              play_circle
-                            </i>
+                            <img
+                              src="/images/play.png"
+                              alt="play"
+                              className="absolute ltr:left-0 rtl:right-0 w-[20px] h-[20px] object-contain mt-[2px] top-1/2 -translate-y-1/2"
+                            />
                             Securing Computers, Laptops, and Mobile Devices
                           </a>
                           <span className="block text-gray-500 dark:text-gray-400 mt-[10px] sm:mt-0">

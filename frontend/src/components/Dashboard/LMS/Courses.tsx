@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const CARD_THEME = {
     vertical: {
         wrapper:
-            "trezo-card bg-white dark:bg-[#0c1427] rounded-2xl overflow-hidden w-[380px] shadow-sm flex-shrink-0 border border-gray-100 dark:border-[#172036] hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-[#15203c] transition-all duration-300 cursor-pointer flex flex-col",
+            "trezo-card bg-white dark:bg-[#0c1427] rounded-2xl overflow-hidden w-[372px] shadow-sm flex-shrink-0 border border-gray-100 dark:border-[#172036] hover:-translate-y-1 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-[#15203c] transition-all duration-300 cursor-pointer flex flex-col",
         imageWrapper: "h-[240px] w-full overflow-hidden flex-shrink-0",
         content: "flex flex-col flex-grow justify-between",
     },
@@ -121,7 +121,11 @@ const Courses: React.FC<CourseListProps> = ({
 
                                     <div className="flex items-center flex-wrap gap-x-4 gap-y-2 text-[11px] text-gray-500 dark:text-gray-400">
                                         <div className="flex items-center gap-1">
-                                            <i className="material-symbols-outlined text-[14px] text-gray-300">play_circle</i>
+                                            <img
+                                                src="/images/play.png"
+                                                alt="play"
+                                                className="w-[14px] h-[14px] object-contain"
+                                            />
                                             <span className="font-medium text-gray-700 dark:text-gray-300">{course.totalVideos} Videos</span>
                                         </div>
                                         <div className="flex items-center gap-1">
@@ -177,7 +181,11 @@ const Courses: React.FC<CourseListProps> = ({
                                     {/* Stats Row */}
                                     <div className="flex items-center flex-wrap gap-x-3 gap-y-2 text-[10px] text-gray-500 dark:text-gray-400 mb-4">
                                         <div className="flex items-center gap-1">
-                                            <i className="material-symbols-outlined text-[14px] text-gray-300">play_circle</i>
+                                            <img
+                                                src="/images/play.png"
+                                                alt="play"
+                                                className="w-[14px] h-[14px] object-contain"
+                                            />
                                             <span className="font-medium text-gray-700 dark:text-gray-300">{course.totalVideos} Videos</span>
                                         </div>
                                         <div className="flex items-center gap-1">

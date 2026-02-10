@@ -1,217 +1,98 @@
-
 import React from "react";
-import ApexCharts from "react-apexcharts";
-import { type ApexOptions } from "apexcharts";
+import { useNavigate } from "react-router-dom";
 
 const MyResults: React.FC = () => {
-    // Chart Series and Options
-    const series = [
+    const navigate = useNavigate();
+    // Mock data matching your screenshot
+    const testResults = [
         {
-            name: "Score",
-            data: [120, 132, 101, 134, 140, 150],
+            id: 1,
+            name: "Organic Reactions - 07-09-25",
+            correct: 1,
+            incorrect: 0,
+            maxScore: 180,
+            yourScore: 6,
+            bonusMarks: "",
+            percentage: "3.33%",
+            rank: 373,
+            totalRank: 780,
+            accuracy: "100.00%",
+            percentile: "25.15%",
+            attempted: 1,
+            totalQuestions: 54
         },
     ];
 
-    const options: ApexOptions = {
-        chart: {
-            type: "area",
-            height: 350,
-            toolbar: {
-                show: false,
-            },
-        },
-        colors: ["#605DFF"],
-        fill: {
-            type: "gradient",
-            gradient: {
-                shadeIntensity: 1,
-                opacityFrom: 0.7,
-                opacityTo: 0.9,
-                stops: [0, 90, 100],
-            },
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        stroke: {
-            curve: "smooth",
-            width: 2,
-        },
-        xaxis: {
-            categories: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6"],
-            axisBorder: {
-                show: false,
-            },
-            axisTicks: {
-                show: false,
-            },
-            labels: {
-                style: {
-                    colors: "#64748B",
-                    fontSize: "12px",
-                },
-            },
-        },
-        yaxis: {
-            labels: {
-                style: {
-                    colors: "#64748B",
-                    fontSize: "12px",
-                },
-            },
-        },
-        grid: {
-            borderColor: "#F1F5F9",
-            strokeDashArray: 4,
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " points";
-                },
-            },
-        },
-    };
-
     return (
-        <>
-            <div className="mb-[25px]">
-                <h2 className="text-xl font-bold text-black dark:text-white mb-2">
-                    Performance Analytics
-                </h2>
-                <p className="text-gray-500 dark:text-gray-400">
-                    Analyze your test scores and track your improvement.
-                </p>
+        <div className="bg-[#f4f7f6] min-h-screen p-4 md:p-6 font-sans antialiased">
+            {/* Breadcrumb Header */}
+            <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl md:text-2xl font-light text-[#444]">Overall Performance Report</h3>
             </div>
 
-            {/* AI Insight */}
-            <div className="trezo-card bg-[#F5F7FF] dark:bg-[#15203c] border border-primary-200 dark:border-primary-800 p-[20px] md:p-[25px] rounded-md mb-[25px]">
-                <div className="flex items-start">
-                    <div className="bg-white dark:bg-[#0c1427] text-primary-500 w-[50px] h-[50px] rounded-lg flex items-center justify-center shadow-sm shrink-0 ltr:mr-[20px] rtl:ml-[20px]">
-                        <i className="material-symbols-outlined text-[24px]">auto_awesome</i>
-                    </div>
-                    <div>
-                        <h5 className="font-bold text-black dark:text-white mb-[8px]">
-                            AI Performance Insight
-                        </h5>
-                        <p className="text-gray-600 dark:text-gray-400 mb-[15px]">
-                            You're demonstrating strong consistency in <strong>Quantitative Aptitude</strong> but spending 15% more time than average on <strong>Reasoning</strong>. Consider taking standard time-bound drills to improve speed.
-                        </p>
-                        <div className="flex items-center gap-4 text-sm font-medium">
-                            <span className="text-success-600 flex items-center">
-                                <i className="material-symbols-outlined text-[18px] ltr:mr-1 rtl:ml-1">trending_up</i>
-                                +12% Efficiency
-                            </span>
-                            <a href="#" className="text-primary-600 hover:underline">
-                                View Detailed Report →
-                            </a>
-                        </div>
-                    </div>
+            {/* Performance Summary Section */}
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm mb-6 overflow-hidden">
+                <div className="bg-[#fafafa] border-b border-gray-200 px-4 py-2">
+                    <h5 className="font-bold text-[#333] text-[13px]">Performance Summary</h5>
+                </div>
+                <div className="p-4 flex justify-between items-center bg-white">
+                    <span className="text-[#333] font-bold text-sm">Total Tests Attempted:</span>
+                    <span className="text-[#333] text-sm mr-12">1</span>
                 </div>
             </div>
 
-            {/* Stats Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[25px] mb-[25px]">
-                {/* Card 1 */}
-                <div className="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md flex items-center">
-                    <div className="w-[60px] h-[60px] rounded-full bg-success-50 text-success-500 flex items-center justify-center text-3xl ltr:mr-[20px] rtl:ml-[20px]">
-                        <i className="material-symbols-outlined">target</i>
-                    </div>
-                    <div>
-                        <span className="block text-gray-500 dark:text-gray-400 mb-1">Overall Accuracy</span>
-                        <h4 className="text-2xl font-bold text-black dark:text-white mb-0">78.5%</h4>
-                    </div>
+            {/* Test wise Performance Summary Table Section */}
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                <div className="bg-[#fafafa] border-b border-gray-200 px-4 py-2">
+                    <h5 className="font-bold text-[#333] text-[13px]">Test wise Performance Summary</h5>
                 </div>
 
-                {/* Card 2 */}
-                <div className="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md flex items-center">
-                    <div className="w-[60px] h-[60px] rounded-full bg-danger-50 text-danger-500 flex items-center justify-center text-3xl ltr:mr-[20px] rtl:ml-[20px]">
-                        <i className="material-symbols-outlined">award_star</i>
-                    </div>
-                    <div>
-                        <span className="block text-gray-500 dark:text-gray-400 mb-1">Tests Completed</span>
-                        <h4 className="text-2xl font-bold text-black dark:text-white mb-0">142</h4>
-                    </div>
-                </div>
-
-                {/* Card 3 */}
-                <div className="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md flex items-center">
-                    <div className="w-[60px] h-[60px] rounded-full bg-warning-50 text-warning-500 flex items-center justify-center text-3xl ltr:mr-[20px] rtl:ml-[20px]">
-                        <i className="material-symbols-outlined">bolt</i>
-                    </div>
-                    <div>
-                        <span className="block text-gray-500 dark:text-gray-400 mb-1">Avg. Percentile</span>
-                        <h4 className="text-2xl font-bold text-black dark:text-white mb-0">89.2</h4>
-                    </div>
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                        <thead>
+                            <tr className="text-[#333] text-[13px] border-b border-gray-200">
+                                <th className="px-4 py-3 font-bold w-10">#</th>
+                                <th className="px-4 py-3 font-bold">Test</th>
+                                <th className="px-4 py-3 font-bold">Correct</th>
+                                <th className="px-4 py-3 font-bold">Incorrect</th>
+                                <th className="px-4 py-3 font-bold">Max Score</th>
+                                <th className="px-4 py-3 font-bold">Your Score</th>
+                                <th className="px-4 py-3 font-bold">Bonus Marks</th>
+                                <th className="px-4 py-3 font-bold">Per %</th>
+                                <th className="px-4 py-3 font-bold">Rank</th>
+                                <th className="px-4 py-3 font-bold">More</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100">
+                            {testResults.map((test, index) => (
+                                <tr
+                                    key={test.id}
+                                    className="hover:bg-[#f9f9f9] transition-all duration-200 text-[13px] text-[#555] group cursor-pointer"
+                                >
+                                    <td className="px-4 py-3">{index + 1}</td>
+                                    <td className="px-4 py-3 text-[#333]">{test.name}</td>
+                                    <td className="px-4 py-3">{test.correct}</td>
+                                    <td className="px-4 py-3">{test.incorrect}</td>
+                                    <td className="px-4 py-3">{test.maxScore}</td>
+                                    <td className="px-4 py-3">{test.yourScore}</td>
+                                    <td className="px-4 py-3">{test.bonusMarks || ""}</td>
+                                    <td className="px-4 py-3">{test.percentage}</td>
+                                    <td className="px-4 py-3">{test.rank}</td>
+                                    <td className="px-4 py-3">
+                                        <button
+                                            onClick={() => navigate("/dashboard/test-report", { state: { testData: test } })}
+                                            className="bg-[#00a65a] hover:bg-[#008d4c] active:scale-95 text-white px-3 py-1.5 rounded-md text-[12px] font-medium transition-all shadow-sm"
+                                        >
+                                            Report
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-[25px]">
-                {/* Score Performance Chart */}
-                <div className="lg:col-span-2 trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md">
-                    <div className="flex items-center justify-between mb-[20px]">
-                        <h5 className="mb-0 font-bold text-black dark:text-white">Score Performance</h5>
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
-                            <span className="w-2 h-2 rounded-full bg-primary-500 block"></span> Score
-                        </div>
-                    </div>
-                    <div className="min-h-[300px]">
-                        <ApexCharts
-                            options={options}
-                            series={series}
-                            type="area"
-                            height={350}
-                        />
-                    </div>
-                </div>
-
-                {/* Recent Test History */}
-                <div className="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md">
-                    <div className="flex items-center justify-between mb-[20px]">
-                        <h5 className="mb-0 font-bold text-black dark:text-white">Recent Test History</h5>
-                        <button className="text-xs px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 transition-colors">Download Report</button>
-                    </div>
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm text-left">
-                            <thead className="text-gray-500 dark:text-gray-400 uppercase bg-gray-50 dark:bg-[#15203c]">
-                                <tr>
-                                    <th className="px-3 py-2">Test Name</th>
-                                    <th className="px-3 py-2">Date</th>
-                                    <th className="px-3 py-2">Score</th>
-                                    <th className="px-3 py-2">Rank</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-100 dark:divide-[#172036]">
-                                <tr className="text-gray-700 dark:text-gray-300">
-                                    <td className="px-3 py-3 font-medium">SSC CGL Tier I Mock 3</td>
-                                    <td className="px-3 py-3 text-xs text-gray-500">10 Oct 2024</td>
-                                    <td className="px-3 py-3 font-bold">145/200</td>
-                                    <td className="px-3 py-3 text-gray-500">#1042</td>
-                                </tr>
-                                <tr className="text-gray-700 dark:text-gray-300">
-                                    <td className="px-3 py-3 font-medium">English Sectional Test 5</td>
-                                    <td className="px-3 py-3 text-xs text-gray-500">08 Oct 2024</td>
-                                    <td className="px-3 py-3 font-bold">42/50</td>
-                                    <td className="px-3 py-3 text-gray-500">#121</td>
-                                </tr>
-                                <tr className="text-gray-700 dark:text-gray-300">
-                                    <td className="px-3 py-3 font-medium">Maths Speed Test 12</td>
-                                    <td className="px-3 py-3 text-xs text-gray-500">05 Oct 2024</td>
-                                    <td className="px-3 py-3 font-bold">25/50</td>
-                                    <td className="px-3 py-3 text-gray-500">#5200</td>
-                                </tr>
-                                <tr className="text-gray-700 dark:text-gray-300">
-                                    <td className="px-3 py-3 font-medium">SSC CGL Tier I Mock 2</td>
-                                    <td className="px-3 py-3 text-xs text-gray-500">01 Oct 2024</td>
-                                    <td className="px-3 py-3 font-bold">130/200</td>
-                                    <td className="px-3 py-3 text-gray-500">#2100</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </>
+        </div>
     );
 };
 
