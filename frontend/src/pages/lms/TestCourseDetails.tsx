@@ -86,8 +86,11 @@ const TestCourseDetails: React.FC = () => {
                 </div>
 
                 {/* Tabs */}
-                <div className="flex w-full mb-8">
-                    <div className="inline-flex bg-gray-100/80 p-1 rounded-xl border border-gray-200/50">
+                {/* Centering Container */}
+                <div className="flex justify-center w-full my-8">
+
+                    {/* Your Button Group */}
+                    <div className="flex flex-row items-center justify-center bg-gray-100/80 p-1 rounded-xl border border-gray-200/50">
                         <button
                             onClick={() => setActiveTab("all-tests")}
                             className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${activeTab === "all-tests"
@@ -107,23 +110,21 @@ const TestCourseDetails: React.FC = () => {
                             Live Tests
                         </button>
                     </div>
+
                 </div>
 
                 {/* Content Area */}
                 {
                     activeTab === "all-tests" && (
-                        <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-4 max-w-5xl mx-auto w-full">
                             {/* Series 1 */}
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2 bg-gray-50/80 p-6 rounded-3xl border border-gray-100">
                                 <div
                                     onClick={() => toggleSeries(1)}
-                                    className="cursor-pointer bg-blue-50/50 border border-blue-100 rounded-xl p-6 flex items-center justify-between gap-3 hover:bg-blue-100/50 transition-colors"
+                                    className="cursor-pointer bg-white border border-blue-100 rounded-xl p-6 flex items-center justify-between gap-3 hover:bg-blue-50/50 transition-colors"
                                 >
                                     <div className="flex items-center gap-2">
-                                        <div className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-md">
-                                            <i className="material-symbols-outlined text-gray-500 text-lg">description</i>
-                                        </div>
-                                        <h6 className="flex items-center text-sm font-bold text-gray-800">{title} Test Series</h6>
+                                        <h4 className="flex items-center text-sm font-bold text-gray-800">{title} Test Series</h4>
                                     </div>
                                     <div className="flex items-center gap-3">
                                         <span className="text-sm font-extrabold text-blue-600 bg-white border border-blue-100 px-3 py-1 rounded shadow-sm">Total Tests: 3</span>
@@ -132,21 +133,21 @@ const TestCourseDetails: React.FC = () => {
                                 </div>
 
                                 {openSeries[1] && (
-                                    <div className="flex flex-col gap-4 py-4 animate-in fade-in slide-in-from-top-2 duration-300 justify-start">
+                                    <div className="flex flex-col gap-4 pt-4 animate-in fade-in slide-in-from-top-2 duration-300 justify-start">
                                         {[
                                             { id: 1, title: 'General Test-01', questions: 150, marks: 600, minutes: 90, date: '10-11-2026' },
                                             { id: 2, title: 'General Test-02', questions: 100, marks: 400, minutes: 120, date: '01-02-2026' },
                                             { id: 3, title: 'General Test-03', questions: 200, marks: 800, minutes: 30, date: '06-03-2026' }
                                         ].map((test) => (
-                                            <div key={test.id} className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-transparent hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-1 w-full flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
-                                                <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-2xl"></div>
+                                            <div key={test.id} className="group bg-white rounded-xl py-2 px-4 shadow-sm hover:shadow-md border border-transparent hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-0.5 w-full flex flex-col md:flex-row items-center justify-between gap-3 relative overflow-hidden">
+                                                <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-xl"></div>
 
-                                                <div className="flex items-center gap-4 w-full md:w-auto">
-                                                    <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                                        <i className="material-symbols-outlined text-[26px]">description</i>
+                                                <div className="flex items-center gap-3 w-full md:w-auto">
+                                                    <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300 overflow-hidden">
+                                                        <img src="/images/paper2.png" alt="Test Icon" className="w-6 h-6 object-contain" />
                                                     </div>
                                                     <div className="flex-1">
-                                                        <h4 className="!text-[20px] font-bold text-gray-900 group-hover:text-blue-700 transition-colors mb-1">{test.title}</h4>
+                                                        <h5 className="!text-[16px] font-bold text-gray-900 group-hover:text-blue-700 transition-colors mb-0.5">{test.title}</h5>
                                                         <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 font-medium">
                                                             <span>{test.questions} Questions</span>
                                                             <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
@@ -176,16 +177,13 @@ const TestCourseDetails: React.FC = () => {
                             </div>
 
                             {/* Series 2 */}
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2 bg-gray-50/80 p-6 rounded-3xl border border-gray-100">
                                 <div
                                     onClick={() => toggleSeries(2)}
-                                    className="cursor-pointer bg-blue-50/50 border border-blue-100 rounded-xl p-6 flex items-center justify-between gap-3 hover:bg-blue-100/50 transition-colors"
+                                    className="cursor-pointer bg-white border border-blue-100 rounded-xl p-6 flex items-center justify-between gap-3 hover:bg-blue-50/50 transition-colors"
                                 >
                                     <div className="flex items-center gap-2">
-                                        <div className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-md">
-                                            <i className="material-symbols-outlined text-gray-500 text-lg">description</i>
-                                        </div>
-                                        <h6 className="flex items-center text-sm font-bold text-gray-800">{title} Practice Series</h6>
+                                        <h4 className="flex items-center text-sm font-bold text-gray-800">{title} Practice Series</h4>
                                     </div>
                                     <div className="flex items-center gap-3">
                                         <span className="text-sm font-extrabold text-blue-600 bg-white border border-blue-100 px-3 py-1 rounded shadow-sm">Total Tests: 2</span>
@@ -194,20 +192,20 @@ const TestCourseDetails: React.FC = () => {
                                 </div>
 
                                 {openSeries[2] && (
-                                    <div className="flex flex-col gap-4 py-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                                    <div className="flex flex-col gap-4 pt-4 animate-in fade-in slide-in-from-top-2 duration-300">
                                         {[
                                             { id: 4, title: 'Practice Test-01', questions: 50, marks: 200, minutes: 45, date: '12-11-2026' },
                                             { id: 5, title: 'Practice Test-02', questions: 50, marks: 200, minutes: 45, date: '15-11-2026' }
                                         ].map((test) => (
-                                            <div key={test.id} className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-transparent hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-1 w-full flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
-                                                <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-2xl"></div>
+                                            <div key={test.id} className="group bg-white rounded-xl py-2 px-4 shadow-sm hover:shadow-md border border-transparent hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-0.5 w-full flex flex-col md:flex-row items-center justify-between gap-3 relative overflow-hidden">
+                                                <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-xl"></div>
 
-                                                <div className="flex items-center gap-4 w-full md:w-auto">
-                                                    <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                                        <i className="material-symbols-outlined text-[26px]">description</i>
+                                                <div className="flex items-center gap-3 w-full md:w-auto">
+                                                    <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300 overflow-hidden">
+                                                        <img src="/images/paper2.png" alt="Test Icon" className="w-6 h-6 object-contain" />
                                                     </div>
                                                     <div className="flex-1">
-                                                        <h4 className="!text-[20px] font-bold text-gray-900 group-hover:text-blue-700 transition-colors mb-1">{test.title}</h4>
+                                                        <h6 className="!text-[16px] font-bold text-gray-900 group-hover:text-blue-700 transition-colors mb-0.5">{test.title}</h6>
                                                         <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 font-medium">
                                                             <span>{test.questions} Questions</span>
                                                             <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
@@ -241,7 +239,7 @@ const TestCourseDetails: React.FC = () => {
 
                 {
                     activeTab === "live-tests" && (
-                        <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-4 max-w-5xl mx-auto w-full">
                             {(() => {
                                 // Generate dynamic live tests
                                 const liveTests = [];
@@ -271,16 +269,16 @@ const TestCourseDetails: React.FC = () => {
 
                                 return liveTests;
                             })().map((test) => (
-                                <div key={test.id} className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-transparent hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-1 w-full flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
-                                    <div className={`absolute top-0 left-0 w-1 h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-2xl ${test.isLive ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                <div key={test.id} className="group bg-white rounded-xl py-2 px-4 shadow-sm hover:shadow-md border border-transparent hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-0.5 w-full flex flex-col md:flex-row items-center justify-between gap-3 relative overflow-hidden">
+                                    <div className={`absolute top-0 left-0 w-1 h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-xl ${test.isLive ? 'bg-red-500' : 'bg-green-500'}`}></div>
 
-                                    <div className="flex items-center gap-4 w-full md:w-auto">
-                                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 ${test.isLive ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-600'}`}>
-                                            <i className="material-symbols-outlined text-[26px]">sensors</i>
+                                    <div className="flex items-center gap-3 w-full md:w-auto">
+                                        <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300 overflow-hidden ${test.isLive ? 'bg-red-50' : 'bg-green-50'}`}>
+                                            <img src="/images/paper2.png" alt="Test Icon" className="w-6 h-6 object-contain" />
                                         </div>
                                         <div className="flex-1">
-                                            <div className="flex items-center gap-2 mb-1">
-                                                <h4 className="!text-[20px] font-bold text-gray-900 group-hover:text-blue-700 transition-colors">{test.title}</h4>
+                                            <div className="flex items-center gap-2 mb-0.5">
+                                                <h4 className="!text-[16px] font-bold text-gray-900 group-hover:text-blue-700 transition-colors">{test.title}</h4>
                                                 {test.isLive ? (
                                                     <span className="bg-red-100 text-red-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-red-200 flex items-center gap-1">
                                                         <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
