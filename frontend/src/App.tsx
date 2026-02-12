@@ -20,6 +20,7 @@ import MyResults from "./pages/dashboard/MyResults";
 import TestReport from "./pages/dashboard/TestReport";
 import MyCourses from "./pages/dashboard/MyCourses";
 import MyPurchases from "./pages/dashboard/MyPurchases";
+import Invoice from "./pages/dashboard/Invoice";
 import Announcements from "./pages/dashboard/Announcements";
 
 // Apps
@@ -183,6 +184,7 @@ const App: React.FC = () => {
                 <Route path="/dashboard/test-report" element={<TestReport />} />
                 <Route path="/my-courses" element={<MyCourses />} />
                 <Route path="/my-purchases" element={<MyPurchases />} />
+                <Route path="/invoice/:orderId" element={<Invoice />} />
                 <Route path="/announcements" element={<Announcements />} />
 
                 {/* Apps */}

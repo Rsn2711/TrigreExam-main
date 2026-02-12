@@ -126,9 +126,9 @@ const TestReport: React.FC = () => {
 
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                    <h2 className="text-xl md:text-2xl font-medium text-gray-800">
+                    <h3 className="text-xl md:text-2xl font-medium text-gray-800">
                         Test Report of {testData.name}
-                    </h2>
+                    </h3>
                 </div>
 
                 {/* Tabs */}
@@ -230,8 +230,7 @@ const TestReport: React.FC = () => {
                         {/* Compare with Topper */}
                         <CompareWithTopper />
 
-                        {/* Our Toppers */}
-                        <OurToppers />
+
                     </div>
                 )}
 
@@ -245,7 +244,7 @@ const TestReport: React.FC = () => {
                 {/* Compare with Topper Tab */}
                 {activeTab === "Compare with Topper" && (
                     <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-                        <Leaderboard />
+                        <OurToppers />
                     </div>
                 )}
 
@@ -262,7 +261,7 @@ const TestReport: React.FC = () => {
 
 const CompareWithTopper: React.FC = () => {
     const [activeSection, setActiveSection] = useState("Overall");
-    const sections = ["Overall", "Numerical Ability", "Verbal Ability", "Reasoning Ability"];
+    const sections = ["Overall", "Physical", "Organic", "Inorganic"];
 
     const comparisonData: Record<string, { you: TopperComparisonData, topper: TopperComparisonData, avg: TopperComparisonData }> = {
         "Overall": {
@@ -409,8 +408,8 @@ const OurToppers: React.FC = () => {
 };
 
 const QuestionWise: React.FC<{ totalQuestions: number }> = ({ totalQuestions }) => {
-    // Generate demo data for 54 questions
-    const questionData = Array.from({ length: totalQuestions }, (_, i) => ({
+    // Generate demo data capped at 20 questions
+    const questionData = Array.from({ length: Math.min(totalQuestions, 20) }, (_, i) => ({
         id: i + 1,
         correctAns: ["a", "b", "c", "d"][Math.floor(Math.random() * 4)],
         yourAns: i === 18 || i === 25 ? ["a", "b", "c", "d"][Math.floor(Math.random() * 4)] : "",
@@ -419,59 +418,78 @@ const QuestionWise: React.FC<{ totalQuestions: number }> = ({ totalQuestions }) 
     }));
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-6">
             {/* Time Analytics Chart */}
-            <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm overflow-x-auto">
-                <h5 className="text-[13px] font-bold text-[#333] mb-8 bg-gray-50/50 -m-6 p-4 border-b border-gray-100">Time Taken Per Question</h5>
-                <div className="min-w-[800px] h-[300px] relative mt-10">
-                    <div className="absolute left-0 inset-y-0 w-10 flex flex-col justify-between text-[11px] text-gray-400 pb-6 border-r border-gray-100">
-                        {[22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0].map(val => (
-                            <span key={val}>{val}</span>
-                        ))}
-                    </div>
-                    <div className="ml-12 h-full flex items-end gap-[2px] border-b border-gray-100">
-                        {questionData.map(q => (
-                            <div key={q.id} className="flex-1 group relative flex flex-col items-center">
-                                <div
-                                    className="w-full bg-blue-600 rounded-t-[1px] transition-all duration-500 hover:bg-blue-400"
-                                    style={{ height: `${(q.timeTaken / 22) * 100}%` }}
-                                >
-                                    {q.timeTaken > 0 && (
-                                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap z-20">
-                                            {q.timeTaken}s
-                                        </div>
-                                    )}
+            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                <div className="px-5 py-3.5 border-b border-gray-100 flex items-center justify-between">
+                    <span className="font-semibold text-gray-700 text-[14px] border-l-[3px] border-blue-500 pl-2.5">Time Taken Per Question</span>
+                    <span className="text-[11px] text-gray-400 font-medium">in seconds</span>
+                </div>
+                <div className="p-5 overflow-x-auto">
+                    <div className="min-w-[700px] h-[200px] relative">
+                        <div className="absolute left-0 inset-y-0 w-8 flex flex-col justify-between text-[10px] text-gray-400 pb-5">
+                            {[20, 15, 10, 5, 0].map(val => (
+                                <span key={val} className="text-right">{val}</span>
+                            ))}
+                        </div>
+                        {/* Grid lines */}
+                        <div className="absolute left-10 right-0 inset-y-0 flex flex-col justify-between pb-5 pointer-events-none">
+                            {[0, 1, 2, 3].map(i => (
+                                <div key={i} className="border-b border-gray-100 border-dashed" />
+                            ))}
+                        </div>
+                        <div className="ml-10 h-full flex items-end gap-[3px] border-b border-gray-200 pb-0">
+                            {questionData.map(q => (
+                                <div key={q.id} className="flex-1 group relative flex flex-col items-center">
+                                    <div
+                                        className="w-full bg-blue-400 rounded-t-sm transition-all duration-300 hover:bg-blue-500 min-h-[1px]"
+                                        style={{ height: q.timeTaken > 0 ? `${(q.timeTaken / 22) * 100}%` : '0%' }}
+                                    >
+                                        {q.timeTaken > 0 && (
+                                            <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gray-700 text-white text-[9px] px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap z-20 shadow-sm">
+                                                {q.timeTaken}s
+                                            </div>
+                                        )}
+                                    </div>
+                                    <span className="absolute -bottom-4 text-[8px] text-gray-400 font-medium">{q.id}</span>
                                 </div>
-                                <span className="absolute -bottom-6 text-[9px] text-gray-400">{q.id}</span>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
 
             {/* Question Details Table */}
             <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                <div className="px-5 py-3.5 border-b border-gray-100">
+                    <span className="font-semibold text-gray-700 text-[14px] border-l-[3px] border-blue-500 pl-2.5">Question Details</span>
+                </div>
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+                    <table className="w-full text-left">
                         <thead>
-                            <tr className="bg-gray-50/50 text-[#333] text-[13px] border-b border-gray-100">
-                                <th className="px-4 py-3 font-bold border-r border-gray-100">Q. No.</th>
-                                <th className="px-4 py-3 font-bold border-r border-gray-100">Correct Ans</th>
-                                <th className="px-4 py-3 font-bold border-r border-gray-100">Your Ans</th>
-                                <th className="px-4 py-3 font-bold border-r border-gray-100">Time Takes(Sec.)</th>
-                                <th className="px-4 py-3 font-bold">Status</th>
+                            <tr className="bg-gray-50 text-[11px] text-gray-400 uppercase tracking-wider border-b border-gray-200">
+                                <th className="px-5 py-3 font-semibold w-[60px]">Q. No</th>
+                                <th className="px-5 py-3 font-semibold">Correct Ans</th>
+                                <th className="px-5 py-3 font-semibold">Your Ans</th>
+                                <th className="px-5 py-3 font-semibold">Time (Sec)</th>
+                                <th className="px-5 py-3 font-semibold text-right">Status</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-50">
-                            {questionData.map(q => (
-                                <tr key={q.id} className="text-[13px] text-gray-600 hover:bg-gray-50/30 transition-colors">
-                                    <td className="px-4 py-3 font-medium border-r border-gray-50">{q.id}</td>
-                                    <td className="px-4 py-3 border-r border-gray-50">{q.correctAns}</td>
-                                    <td className="px-4 py-3 border-r border-gray-50">{q.yourAns || "-"}</td>
-                                    <td className="px-4 py-3 border-r border-gray-50">{q.timeTaken}</td>
-                                    <td className={`px-4 py-3 font-medium ${q.status === 'Correct' ? 'text-green-600' :
-                                        q.status === 'Incorrect' ? 'text-red-500' : 'text-gray-400'
-                                        }`}>{q.status}</td>
+                        <tbody>
+                            {questionData.map((q, idx) => (
+                                <tr key={q.id} className={`text-[13px] text-gray-600 transition-colors hover:bg-blue-50/30 ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}`}>
+                                    <td className="px-5 py-2.5 font-semibold text-gray-700">{q.id}</td>
+                                    <td className="px-5 py-2.5 uppercase font-medium">{q.correctAns}</td>
+                                    <td className="px-5 py-2.5 uppercase font-medium">{q.yourAns || "—"}</td>
+                                    <td className="px-5 py-2.5 font-mono text-[12px]">{q.timeTaken}</td>
+                                    <td className="px-5 py-2.5 text-right">
+                                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${q.status === 'Correct' ? 'bg-emerald-50 text-emerald-600' :
+                                            q.status === 'Incorrect' ? 'bg-rose-50 text-rose-600' :
+                                                'bg-gray-100 text-gray-400'
+                                            }`}>
+                                            {q.status}
+                                        </span>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -482,98 +500,252 @@ const QuestionWise: React.FC<{ totalQuestions: number }> = ({ totalQuestions }) 
     );
 };
 
-const Leaderboard: React.FC = () => {
-    const leaderboardData = [
-        { name: "NAVEEN BHAKAR", correct: 54, incorrect: 0, score: 180, per: "100.00%", rank: 1 },
-        { name: "Shivani", correct: 53, incorrect: 1, score: 177, per: "98.33%", rank: 2 },
-        { name: "Rishabh singh Baghel", correct: 52, incorrect: 2, score: 175, per: "97.22%", rank: 3 },
-        { name: "SUM17", correct: 49, incorrect: 2, score: 164, per: "91.11%", rank: 4 },
-        { name: "Prashant deo", correct: 48, incorrect: 5, score: 160, per: "88.89%", rank: 5 },
-        { name: "Viren", correct: 48, incorrect: 6, score: 149, per: "82.78%", rank: 6 },
-        { name: "Anil Garg", correct: 43, incorrect: 4, score: 141, per: "78.33%", rank: 7 },
-        { name: "Shaurya Patel", correct: 44, incorrect: 9, score: 138, per: "76.67%", rank: 8 },
-        { name: "Himanshu", correct: 43, incorrect: 6, score: 131, per: "72.78%", rank: 9 },
-        { name: "Ayush", correct: 38, incorrect: 1, score: 128, per: "71.11%", rank: 10 },
-        { name: "Vishal Saxena", correct: 42, incorrect: 12, score: 127, per: "70.56%", rank: 11 },
-        { name: "AVIRAL JAIN", correct: 43, incorrect: 4, score: 125, per: "69.44%", rank: 12 },
-        { name: "Dhruv gupta", correct: 39, incorrect: 7, score: 122, per: "67.78%", rank: 13 },
-    ];
-
-    return (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-            <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                    <thead>
-                        <tr className="bg-gray-50/50 text-[#333] text-[13px] border-b border-gray-100">
-                            <th className="px-6 py-4 font-bold">Student Name</th>
-                            <th className="px-4 py-4 font-bold text-center">Correct</th>
-                            <th className="px-4 py-4 font-bold text-center">InCorrect</th>
-                            <th className="px-4 py-4 font-bold text-center">Score</th>
-                            <th className="px-4 py-4 font-bold text-center">Per%</th>
-                            <th className="px-4 py-4 font-bold text-center">Rank</th>
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-50">
-                        {leaderboardData.map((student, idx) => (
-                            <tr key={idx} className="text-[13px] text-gray-700 hover:bg-gray-50/30 transition-colors">
-                                <td className="px-6 py-3.5 font-medium uppercase">{student.name}</td>
-                                <td className="px-4 py-3.5 text-center">{student.correct}</td>
-                                <td className="px-4 py-3.5 text-center">{student.incorrect}</td>
-                                <td className="px-4 py-3.5 text-center font-bold">{student.score}</td>
-                                <td className="px-4 py-3.5 text-center">{student.per}</td>
-                                <td className="px-4 py-3.5 text-center font-bold text-blue-600">{student.rank}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    );
-};
 
 
-const Solutions: React.FC<{ totalQuestions: number }> = ({ totalQuestions }) => {
-    // Generate demo solution data for 54 questions
-    const solutionData = Array.from({ length: totalQuestions }, (_, i) => ({
+
+const Solutions: React.FC<{ totalQuestions: number }> = () => {
+    // State for active question and section
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [activeSection, setActiveSection] = useState("Physical");
+    const [showSolution] = useState(true);
+
+    // Mock Sections
+    const sections = ["Physical", "Organic", "Inorganic"];
+
+    // Generate more detailed mock data for the full experience
+    const questions = Array.from({ length: 10 }, (_, i) => ({
         id: i + 1,
-        question: `What is the expected product when ${i % 2 === 0 ? 'an aldehyde' : 'a ketone'} reacts with ${i % 3 === 0 ? 'Grignard reagent' : 'an alcohol'} followed by acid hydrolysis in the organic synthesis process?`,
-        correctOption: ["a", "b", "c", "d"][Math.floor(Math.random() * 4)],
-        explanation: `The reaction involves a nucleophilic attack on the carbonyl carbon by the R- group of the Grignard reagent, forming an alkoxide intermediate. Upon acid hydrolysis, this intermediate picks up a proton to yield a ${i % 2 === 0 ? 'secondary' : 'tertiary'} alcohol. This is a fundamental C-C bond-forming reaction in organic chemistry.`
+        question: `If the average of 5 numbers is 20, and one number is removed, the average becomes 18. What is the removed number?`,
+        briefExplanation: "The sum of 5 numbers is 20 * 5 = 100. The sum of 4 numbers is 18 * 4 = 72. The removed number is 100 - 72 = 28.",
+        options: [
+            { id: "a", text: "28" },
+            { id: "b", text: "30" },
+            { id: "c", text: "26" },
+            { id: "d", text: "32" }
+        ],
+        correctOption: "a",
+        userSelectedOption: i % 3 === 0 ? "a" : i % 3 === 1 ? "b" : null, // Mock user selection
+        status: i % 3 === 0 ? "Correct" : i % 3 === 1 ? "Incorrect" : "Unattempted",
+        marks: i % 3 === 0 ? 1 : 0,
+        timeTaken: "02:25",
+        avgTime: "02:13",
+        accuracy: "57%",
+        explanation: "Sum of 5 numbers = 20 * 5 = 100. Sum of 4 numbers = 18 * 4 = 72. Removed number = 100 - 72 = 28."
     }));
 
+    const currentQuestion = questions[currentQuestionIndex];
+
     return (
-        <div className="space-y-6 max-w-5xl mx-auto">
-            {solutionData.map((sol) => (
-                <div key={sol.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden group hover:border-blue-200 transition-all duration-300">
-                    <div className="bg-gray-50/50 px-6 py-4 border-b border-gray-100 flex justify-between items-center group-hover:bg-blue-50/30 transition-colors">
-                        <h5 className="font-bold text-gray-800 flex items-center gap-2">
-                            <span className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center text-sm shadow-sm">Q{sol.id}</span>
-                            Question Detail
-                        </h5>
-                        <div className="flex items-center gap-2">
-                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Correct Answer:</span>
-                            <span className="w-7 h-7 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-bold text-sm border border-green-200 uppercase">{sol.correctOption}</span>
-                        </div>
+        <div className="flex flex-col lg:flex-row gap-6 h-[580px]">
+            {/* Left Main Content Area */}
+            <div className="flex-1 flex flex-col bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+
+
+                {/* Question Header Info */}
+                <div className="flex items-center px-6 py-4 border-b border-gray-100 bg-white gap-4 flex-wrap">
+                    {/* Question Number */}
+                    <span className="font-extrabold text-gray-800 text-[16px]">Question No.{currentQuestion.id}</span>
+
+                    <div className="h-6 w-px bg-gray-200 hidden sm:block"></div>
+
+                    {/* Status Badge */}
+                    <span className={`px-3 py-1 rounded-full text-[12px] font-bold capitalize flex items-center justify-center min-w-[80px] border ${currentQuestion.status === "Correct" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
+                        currentQuestion.status === "Incorrect" ? "bg-rose-50 text-rose-700 border-rose-200" :
+                            "bg-gray-50 text-gray-500 border-gray-200"
+                        }`}>
+                        {currentQuestion.status}
+                    </span>
+
+                    {/* Time Info */}
+                    <div className="flex items-center gap-3 text-[14px] text-gray-600 font-medium">
+                        <i className={`material-symbols-outlined !text-[20px] ${currentQuestion.status === "Correct" ? "text-emerald-500" :
+                            currentQuestion.status === "Incorrect" ? "text-rose-500" : "text-gray-400"
+                            }`}>timer</i>
+                        <span>You: <span className="text-gray-800">{currentQuestion.timeTaken}</span></span>
+                        <span className="text-gray-400">Avg: {currentQuestion.avgTime}</span>
                     </div>
-                    <div className="p-6 md:p-8 space-y-6">
-                        <div className="space-y-3">
-                            <p className="text-gray-700 text-[15px] leading-relaxed font-medium">
-                                {sol.question}
-                            </p>
+
+                    <div className="h-6 w-px bg-gray-200 hidden sm:block"></div>
+
+                    {/* Marks */}
+                    <div className="flex items-center gap-2 text-[14px] text-gray-800 font-medium">
+                        <span>Marks</span>
+                        <span className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold ${currentQuestion.marks > 0 ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-500"
+                            }`}>
+                            {currentQuestion.marks}
+                        </span>
+                    </div>
+
+
+
+                </div>
+
+                {/* Question & Options Area */}
+                <div className="flex-1 overflow-y-auto p-8 bg-white relative">
+                    <div className="max-w-4xl mx-auto">
+                        {/* Question Text */}
+                        <div className="mb-8">
+                            <h6 className="text-[16px] md:text-[18px] text-gray-800 font-medium leading-relaxed">
+                                {currentQuestion.question}
+                            </h6>
                         </div>
 
-                        <div className="bg-blue-50/50 rounded-xl p-5 border border-blue-100/50">
-                            <h6 className="text-[12px] font-extrabold text-blue-600 uppercase tracking-wider mb-3 flex items-center gap-2">
-                                <i className="material-symbols-outlined !text-[16px]">info</i>
-                                Detailed Explanation
-                            </h6>
-                            <p className="text-gray-600 text-[14px] leading-loose">
-                                {sol.explanation}
-                            </p>
+                        {/* Options */}
+                        <div className="space-y-3 mb-8">
+                            {currentQuestion.options.map((opt) => {
+                                const isSelected = currentQuestion.userSelectedOption === opt.id;
+                                const isCorrect = currentQuestion.correctOption === opt.id;
+                                const isUserWrong = isSelected && !isCorrect;
+
+                                let borderClass = "border-gray-200 hover:bg-gray-50";
+
+                                let icon = "radio_button_unchecked";
+                                let iconColor = "text-gray-300";
+
+                                if (showSolution || currentQuestion.status !== "Unattempted") {
+                                    if (isCorrect) {
+                                        borderClass = "border-emerald-500 bg-emerald-50/50";
+                                        icon = "check_circle";
+                                        iconColor = "text-emerald-500";
+                                    } else if (isUserWrong) {
+                                        borderClass = "border-rose-500 bg-rose-50/50";
+                                        icon = "cancel";
+                                        iconColor = "text-rose-500";
+                                    }
+                                }
+
+                                return (
+                                    <div
+                                        key={opt.id}
+                                        className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-all duration-200 cursor-default ${borderClass}`}
+                                    >
+                                        <i className={`material-symbols-outlined ${iconColor}`}>{icon}</i>
+                                        <span className="font-medium text-gray-700">{opt.text}</span>
+                                    </div>
+                                );
+                            })}
                         </div>
+
+                        {/* Navigation Buttons (Middle) */}
+                        <div className="flex justify-between items-center mb-6">
+                            <button
+                                onClick={() => setCurrentQuestionIndex(prev => Math.max(0, prev - 1))}
+                                disabled={currentQuestionIndex === 0}
+                                className="flex items-center gap-2 px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <i className="material-symbols-outlined text-[18px]">arrow_back</i>
+                                Previous
+                            </button>
+                            <button
+                                onClick={() => setCurrentQuestionIndex(prev => Math.min(questions.length - 1, prev + 1))}
+                                disabled={currentQuestionIndex === questions.length - 1}
+                                className="flex items-center gap-2 px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-bold transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                Next
+                                <i className="material-symbols-outlined text-[18px]">arrow_forward</i>
+                            </button>
+                        </div>
+
+                        {/* Solution Section */}
+                        {showSolution && (
+                            <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
+                                <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-100 mb-6">
+                                    <h4 className="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                                        <span className="w-6 h-6 rounded bg-blue-500 text-white flex items-center justify-center text-[14px]">S</span>
+                                        Solution
+                                    </h4>
+                                    <p className="text-gray-700 leading-relaxed text-[14px]">
+                                        {currentQuestion.explanation}
+                                    </p>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
-            ))}
+
+
+            </div>
+
+            {/* Right Sidebar - Palette */}
+            <div className="w-full lg:w-[320px] bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col overflow-hidden">
+                {/* Section Selector */}
+                <div className="px-4 pt-4 pb-0">
+                    <h6 className="text-[13px] font-semibold text-gray-400 uppercase tracking-wider mb-3">Sections</h6>
+                    <div className="flex gap-1 border-b border-gray-100">
+                        {sections.map(section => (
+                            <button
+                                key={section}
+                                onClick={() => setActiveSection(section)}
+                                className={`flex-1 py-2.5 text-[12px] font-semibold transition-all relative ${activeSection === section
+                                    ? "text-blue-600"
+                                    : "text-gray-400 hover:text-gray-600"
+                                    }`}
+                            >
+                                {section}
+                                {activeSection === section && (
+                                    <div className="absolute bottom-0 left-2 right-2 h-[2px] bg-blue-600 rounded-full" />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Stats Summary */}
+                <div className="flex items-center justify-center gap-4 px-4 py-3 border-b border-gray-100 text-[11px]">
+                    <div className="flex items-center gap-1.5">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                        <span className="font-medium text-gray-600">9 Correct</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                        <div className="w-2 h-2 rounded-full bg-rose-500" />
+                        <span className="font-medium text-gray-600">11 Wrong</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                        <div className="w-2 h-2 rounded-full bg-gray-300" />
+                        <span className="font-medium text-gray-600">6 Skipped</span>
+                    </div>
+                </div>
+
+                {/* Questions Header */}
+                <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+                    <span className="font-semibold text-gray-700 text-[13px] border-l-[3px] border-blue-500 pl-2.5">{activeSection}</span>
+                    <span className="text-[11px] text-gray-400 font-medium">{questions.length} Questions</span>
+                </div>
+
+                {/* Question Grid */}
+                <div className="flex-1 overflow-y-auto p-4 content-start">
+                    <div className="flex flex-wrap gap-2.5 justify-center">
+                        {questions.map((q, idx) => {
+                            let bgClass = "bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100";
+                            const isActive = idx === currentQuestionIndex;
+
+                            if (q.status === "Correct") bgClass = "bg-emerald-500 text-white border-emerald-500 hover:bg-emerald-600";
+                            else if (q.status === "Incorrect") bgClass = "bg-rose-500 text-white border-rose-500 hover:bg-rose-600";
+
+                            return (
+                                <button
+                                    key={q.id}
+                                    onClick={() => setCurrentQuestionIndex(idx)}
+                                    className={`w-12 h-10 rounded-full flex items-center justify-center text-[12px] font-semibold border transition-all duration-150 ${bgClass} ${isActive ? 'ring-2 ring-offset-1 ring-blue-500 scale-105' : ''
+                                        }`}
+                                >
+                                    {q.id}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/* Sidebar Footer */}
+                <div className="p-3 border-t border-gray-100 flex gap-2">
+                    <button className="flex-1 py-2 text-blue-600 border border-blue-200 bg-blue-50/50 rounded-lg text-[11px] font-semibold hover:bg-blue-100 transition-colors">
+                        Question Paper
+                    </button>
+                    <button className="flex-1 py-2 text-blue-600 border border-blue-200 bg-blue-50/50 rounded-lg text-[11px] font-semibold hover:bg-blue-100 transition-colors">
+                        Summary
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };

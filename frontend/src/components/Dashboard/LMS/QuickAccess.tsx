@@ -75,7 +75,7 @@ const QuickAccess: React.FC = () => {
                         {/* Text */}
                         <span
                             className="
-                                text-[14px]
+                                text-[12px]
                                 font-bold
                                 tracking-[0.15px]
                                 text-gray-700 dark:text-gray-200

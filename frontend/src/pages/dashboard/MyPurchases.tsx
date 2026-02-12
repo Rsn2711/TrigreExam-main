@@ -1,8 +1,10 @@
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const MyPurchases: React.FC = () => {
+    const navigate = useNavigate();
     // Demo Data
     const purchases = [
         {
@@ -65,77 +67,87 @@ const MyPurchases: React.FC = () => {
                 </div>
             </div>
 
-            <div className="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
-                <div className="trezo-card-header mb-[20px] md:mb-[25px] flex items-center justify-between">
-                    <div className="trezo-card-title">
-                        <h5 className="mb-0 text-black dark:text-white font-bold">Order History</h5>
-                    </div>
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[25px]">
+                {purchases.slice(0, 3).map((purchase, index) => {
+                    // Define images for each card
+                    const images = [
+                        '/images/ssc.png',
+                        '/images/cat.webp',
+                        '/images/upsc.webp'
+                    ];
+                    const titles = ['SSC Essentials', 'CAT Essentials', 'UPSC Essentials'];
+                    const image = images[index % 3];
+                    const title = titles[index % 3];
 
-                <div className="trezo-card-content">
-                    <div className="table-responsive overflow-x-auto">
-                        <table className="w-full">
-                            <thead className="text-black dark:text-white border-b border-gray-100 dark:border-[#172036]">
-                                <tr>
-                                    <th className="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap first:rounded-tl-md">
-                                        Order ID
-                                    </th>
-                                    <th className="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap">
-                                        Course
-                                    </th>
-                                    <th className="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap">
-                                        Date
-                                    </th>
-                                    <th className="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap">
-                                        Price
-                                    </th>
-                                    <th className="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap">
-                                        Status
-                                    </th>
-                                    <th className="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap last:rounded-tr-md">
-                                        Action
-                                    </th>
-                                </tr>
-                            </thead>
+                    return (
+                        <div
+                            key={index}
+                            className="bg-white dark:bg-[#0c1427] rounded-xl overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl border border-gray-100 dark:border-[#172036]"
+                        >
+                            {/* Image Header */}
+                            <div className="relative h-[140px] overflow-hidden">
+                                <img
+                                    src={image}
+                                    alt={title}
+                                    className="w-full h-full object-cover"
+                                    style={{ objectPosition: 'center top' }}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                            </div>
 
-                            <tbody className="text-black dark:text-white">
-                                {purchases.map((purchase, index) => (
-                                    <tr key={index} className="border-b border-gray-100 dark:border-[#172036] last:border-none">
-                                        <td className="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] font-medium">
-                                            {purchase.id}
-                                        </td>
-                                        <td className="ltr:text-left rtl:text-right px-[20px] py-[15px]">
-                                            <div className="font-medium max-w-[300px] truncate" title={purchase.course}>
-                                                {purchase.course}
-                                            </div>
-                                        </td>
-                                        <td className="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] text-gray-500 dark:text-gray-400">
-                                            {purchase.date}
-                                        </td>
-                                        <td className="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] font-bold">
-                                            {purchase.price}
-                                        </td>
-                                        <td className="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px]">
-                                            <span className={`inline-block px-2.5 py-1 rounded text-xs font-medium ${purchase.statusClass}`}>
-                                                {purchase.status}
-                                            </span>
-                                        </td>
-                                        <td className="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px]">
-                                            {purchase.status === "Completed" ? (
-                                                <button className="flex items-center gap-1 text-primary-500 hover:text-primary-600 font-medium transition-colors text-sm">
-                                                    <i className="material-symbols-outlined text-[18px]">download</i>
-                                                    Invoice
-                                                </button>
-                                            ) : (
-                                                <span className="text-gray-400 text-sm">-</span>
-                                            )}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                            {/* Card Content */}
+                            <div className="p-5">
+                                {/* Badge */}
+                                <div className="mb-3">
+                                    <span className="inline-block px-2.5 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 text-xs font-bold rounded uppercase tracking-wide">
+                                        Video Course
+                                    </span>
+                                </div>
+
+                                {/* Course Title */}
+                                <h5 className="text-[15px] font-bold text-black dark:text-white mb-3 leading-snug line-clamp-2 min-h-[42px]">
+                                    {purchase.course}
+                                </h5>
+
+                                {/* Meta Information */}
+                                <div className="flex flex-wrap items-center gap-3 mb-3 text-[12px] text-gray-500 dark:text-gray-400">
+                                    <div className="flex items-center gap-1">
+                                        <i className="material-symbols-outlined !text-[16px]">receipt_long</i>
+                                        <span>{purchase.id}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                        <i className="material-symbols-outlined !text-[16px]">calendar_today</i>
+                                        <span>{purchase.date}</span>
+                                    </div>
+                                </div>
+
+                                {/* Status */}
+                                <div className="mb-4">
+                                    <span className={`inline-block px-2.5 py-1 rounded text-xs font-semibold ${purchase.statusClass}`}>
+                                        {purchase.status}
+                                    </span>
+                                </div>
+
+                                {/* Price and Action */}
+                                <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-[#172036]">
+                                    <div>
+                                        <span className="text-xl font-bold text-black dark:text-white">{purchase.price}</span>
+                                    </div>
+
+                                    {purchase.status === "Completed" && (
+                                        <button
+                                            onClick={() => navigate(`/invoice/${encodeURIComponent(purchase.id)}`)}
+                                            className="flex items-center gap-1.5 py-2 px-4 border-2 border-primary-600 text-primary-600 rounded-lg text-[13px] font-semibold hover:bg-primary-600 hover:text-white transition-all"
+                                        >
+                                            <i className="material-symbols-outlined !text-[18px]">download</i>
+                                            Invoice
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
         </>
     );
